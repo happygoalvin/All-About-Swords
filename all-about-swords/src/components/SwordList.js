@@ -1,6 +1,29 @@
 import React from "react";
+import SwordListing from "./components/SwordListing";
+import AddNewSword from "./components/AddNewSword";
+
 
 export default class swordList extends React.Component {
+  state = {
+    active: "SwordListing",
+  };
+
+  renderContent() {
+    if (this.state.active === "SwordListing") {
+      return (
+        <React.Fragment>
+          <SwordListing />
+        </React.Fragment>
+      );
+    } else if (this.state.active === "addSword") {
+      return (
+        <React.Fragment>
+          <AddNewSword />
+        </React.Fragment>
+      );
+    }
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -53,6 +76,7 @@ export default class swordList extends React.Component {
                   </a>
                 </li>
               </ul>
+              {this.renderContent()}
             </div>
           </div>
         </nav>
