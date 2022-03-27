@@ -4,7 +4,7 @@ export default class swordList extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
   <div className="container-fluid">
     <a className="navbar-brand" href="#">
       <img src="/images/sword-logo.svg" alt="" width="30" height="30" className="d-inline-block align-text-top" />
@@ -16,10 +16,16 @@ export default class swordList extends React.Component {
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
         <li className="nav-item">
-          <a className="nav-link active" aria-current="page" href="#">Home</a>
+          <a className="nav-link active" aria-current="page" href="#">Sword Listing</a>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="#">Link</a>
+          <a className="nav-link" href="#">Add New Sword</a>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link" href="#">Fighting Styles</a>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link" href="#">Add New Fighting Style</a>
         </li>
       </ul>
     </div>
