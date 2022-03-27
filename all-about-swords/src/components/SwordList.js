@@ -1,15 +1,14 @@
 import React from "react";
-import SwordListing from "./components/SwordListing";
-import AddNewSword from "./components/AddNewSword";
-
+import SwordListing from "./SwordListing";
+import AddNewSword from "./AddNewSword";
 
 export default class swordList extends React.Component {
   state = {
-    active: "SwordListing",
+    active: "swordList",
   };
 
   renderContent() {
-    if (this.state.active === "SwordListing") {
+    if (this.state.active === "swordList") {
       return (
         <React.Fragment>
           <SwordListing />
@@ -23,6 +22,10 @@ export default class swordList extends React.Component {
       );
     }
   }
+
+  setActive = (page) => {
+    this.setState({ active: page });
+  };
 
   render() {
     return (
@@ -56,12 +59,12 @@ export default class swordList extends React.Component {
             >
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
-                  <a className="nav-link active" aria-current="page" href="#">
+                  <a className="nav-link active" onClick={()=>{this.setActive("swordList")}} aria-current="page">
                     Sword Listing
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
+                  <a className="nav-link" onClick={()=>{this.setActive("addSword")}}>
                     Add New Sword
                   </a>
                 </li>
@@ -76,10 +79,10 @@ export default class swordList extends React.Component {
                   </a>
                 </li>
               </ul>
-              {this.renderContent()}
             </div>
           </div>
         </nav>
+        <div>{this.renderContent()}</div>
       </React.Fragment>
     );
   }
