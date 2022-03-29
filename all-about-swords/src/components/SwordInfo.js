@@ -1,17 +1,30 @@
 import React from "react";
 import SwordList from "./SwordList";
 import AddNewSword from "./AddNewSword";
+import axios from "axios";
 
 export default class swordInfo extends React.Component {
   state = {
     active: "swordInfo",
+    data:[]
   };
+
+  base_url = "https://all-about-swords-express.herokuapp.com/"
+
+  fetchSwordData = async () => {
+    let response = await axios.get(this.base_url + "swords");
+    this.setState({data:response.data.sword_info});
+  }
+  
+  componentDidMount() {
+    this.fetchSwordData();
+  }
 
   renderContent() {
     if (this.state.active === "swordInfo") {
       return (
         <React.Fragment>
-          <SwordList />
+          <SwordList data={this.state.data} />
         </React.Fragment>
       );
     } else if (this.state.active === "addSword") {
