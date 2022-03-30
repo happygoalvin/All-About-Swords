@@ -7,7 +7,8 @@ import axios from "axios";
 export default class swordInfo extends React.Component {
   state = {
     active: "swordInfo",
-    data:[]
+    data:[],
+    searchName: ""
   };
 
   base_url = "https://all-about-swords-express.herokuapp.com/"
@@ -19,6 +20,12 @@ export default class swordInfo extends React.Component {
   
   componentDidMount() {
     this.fetchSwordData();
+  }
+
+  updateFormField = (e) => {
+    this.setState({
+      [e.target.name] : e.target.value
+    })
   }
 
   renderContent() {
@@ -97,7 +104,7 @@ export default class swordInfo extends React.Component {
           </div>
         </nav>
         <div>
-          <SearchBar />
+          <SearchBar data={this.state.data}/>
         </div>
         <div>
           {this.renderContent()}
