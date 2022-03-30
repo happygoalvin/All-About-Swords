@@ -1,5 +1,6 @@
 import React from "react";
 import SwordList from "./SwordList";
+import SearchBar from "./SearchBar";
 import AddNewSword from "./AddNewSword";
 import axios from "axios";
 
@@ -53,7 +54,7 @@ export default class swordInfo extends React.Component {
                 height="30"
                 className="d-inline-block align-text-top"
               />
-              All-About-Swords
+              All About Swords
             </a>
             <button
               className="navbar-toggler"
@@ -95,7 +96,12 @@ export default class swordInfo extends React.Component {
             </div>
           </div>
         </nav>
-        <div>{this.renderContent()}</div>
+        <div>
+          <SearchBar />
+        </div>
+        <div>
+          {this.renderContent()}
+          </div>
       </React.Fragment>
     );
   }
