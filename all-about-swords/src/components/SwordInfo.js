@@ -83,7 +83,7 @@ export default class swordInfo extends React.Component {
               className="collapse navbar-collapse"
               id="navbarSupportedContent"
             >
-              <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li className="nav-item">
                   <a className="nav-link active" onClick={()=>{this.setActive("swordInfo")}} aria-current="page">
                     Sword Listing
@@ -108,6 +108,9 @@ export default class swordInfo extends React.Component {
             </div>
           </div>
         </nav>
+        <div className="d-flex justify-content-center mt-3">
+          <img src="/images/swordsman.gif" className="img-fluid" />
+        </div>
         <div>
           <SearchBar data={this.state.data} value={this.state.filterOptions} updateFormField={this.updateFormField}/>
         </div>
