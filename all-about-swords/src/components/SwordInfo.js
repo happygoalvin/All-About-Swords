@@ -8,6 +8,7 @@ export default class swordInfo extends React.Component {
   state = {
     active: "swordInfo",
     data:[],
+    filteredData: [],
     filterOptions: {
       searchName:"",
       searchMinLength:""
@@ -18,7 +19,10 @@ export default class swordInfo extends React.Component {
 
   fetchSwordData = async () => {
     let response = await axios.get(this.base_url + "swords");
-    this.setState({data:response.data.sword_info});
+    this.setState({
+      data:response.data.sword_info,
+      filteredData: response.data.sword_info
+    });
   }
   
   componentDidMount() {
@@ -30,6 +34,13 @@ export default class swordInfo extends React.Component {
     newOptions[e.target.name] = e.target.value;
     this.setState({
       filterOptions: newOptions
+    })
+  }
+
+  onClickUpdate() {
+    let filteredData = this.state.filteredData.filter(sword => sword.name.includes(this.state.filterOptions.searchName));
+    this.setState({
+      filteredData: filteredData
     })
   }
 
@@ -112,7 +123,7 @@ export default class swordInfo extends React.Component {
           <img src="/images/swordsman.gif" className="img-fluid" />
         </div>
         <div>
-          <SearchBar data={this.state.data} value={this.state.filterOptions} updateFormField={this.updateFormField}/>
+          <SearchBar data={this.state.filteredData} value={this.state.filterOptions} updateFormField={this.updateFormField} onClickUpdate = {this.onClickUpdate} />
         </div>
         <div>
           {this.renderContent()}
