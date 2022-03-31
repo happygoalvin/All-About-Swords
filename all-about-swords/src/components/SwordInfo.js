@@ -8,7 +8,10 @@ export default class swordInfo extends React.Component {
   state = {
     active: "swordInfo",
     data:[],
-    searchName: ""
+    filterOptions: {
+      searchName:"",
+      searchMinLength:""
+    },
   };
 
   base_url = "https://all-about-swords-express.herokuapp.com/"
@@ -23,8 +26,10 @@ export default class swordInfo extends React.Component {
   }
 
   updateFormField = (e) => {
+    let newOptions = {...this.state.filterOptions};
+    newOptions[e.target.name] = e.target.value;
     this.setState({
-      [e.target.name] : e.target.value
+      filterOptions: newOptions
     })
   }
 
@@ -104,7 +109,7 @@ export default class swordInfo extends React.Component {
           </div>
         </nav>
         <div>
-          <SearchBar data={this.state.data}/>
+          <SearchBar data={this.state.data} value={this.state.filterOptions} updateFormField={this.updateFormField}/>
         </div>
         <div>
           {this.renderContent()}
