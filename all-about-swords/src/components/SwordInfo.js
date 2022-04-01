@@ -7,48 +7,76 @@ import axios from "axios";
 export default class swordInfo extends React.Component {
   state = {
     active: "swordInfo",
-    data:[],
+    data: [],
     filteredData: [],
+    tagData: [],
     filterOptions: {
-      searchName:"",
-      searchMinLength:""
+      searchName: "",
+      searchMinLength: "",
+      searchMaxLength: "",
+      tags:[]
     },
   };
 
-  base_url = "https://all-about-swords-express.herokuapp.com/"
+  base_url = "https://all-about-swords-express.herokuapp.com/";
 
   fetchSwordData = async () => {
     let response = await axios.get(this.base_url + "swords");
     this.setState({
-      data:response.data.sword_info,
-      filteredData: response.data.sword_info
+      data: response.data.sword_info,
+      filteredData: response.data.sword_info,
     });
+  };
+
+  fetchTagsData = async () => {
+    let response = await axios.get(this.base_url +"tags");
+    this.setState({
+      tagData : response.data.tags
+    })
   }
-  
+
   componentDidMount() {
     this.fetchSwordData();
   }
 
   updateFormField = (e) => {
-    let newOptions = {...this.state.filterOptions};
+    let newOptions = { ...this.state.filterOptions };
     newOptions[e.target.name] = e.target.value;
     this.setState({
-      filterOptions: newOptions
-    })
-  }
+      filterOptions: newOptions,
+    });
+  };
 
-  onClickUpdate() {
-    let filteredData = this.state.filteredData.filter(sword => sword.name.includes(this.state.filterOptions.searchName));
+  onClickUpdate = () => {
+    let filterData = this.state.data.filter((sword) =>
+      sword.name.includes(this.state.filterOptions.searchName)
+    );
+
+    if (
+      this.state.filterOptions.searchMinLength &&
+      this.state.filterOptions.searchMaxLength
+    ) {
+      filterData = filterData.filter(
+        (sword) =>
+          sword.blade.length >=
+            Number(this.state.filterOptions.searchMinLength) &&
+          sword.blade.length <= Number(this.state.filterOptions.searchMaxLength)
+      );
+    }
+
     this.setState({
-      filteredData: filteredData
-    })
-  }
+      filteredData: filterData,
+    });
+    console.log(filterData);
+  };
+
+  onClickValidation = () => {};
 
   renderContent() {
     if (this.state.active === "swordInfo") {
       return (
         <React.Fragment>
-          <SwordList data={this.state.data} />
+          <SwordList data={this.state.filteredData} />
         </React.Fragment>
       );
     } else if (this.state.active === "addSword") {
@@ -96,12 +124,23 @@ export default class swordInfo extends React.Component {
             >
               <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li className="nav-item">
-                  <a className="nav-link active" onClick={()=>{this.setActive("swordInfo")}} aria-current="page">
+                  <a
+                    className="nav-link active"
+                    onClick={() => {
+                      this.setActive("swordInfo");
+                    }}
+                    aria-current="page"
+                  >
                     Sword Listing
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" onClick={()=>{this.setActive("addSword")}}>
+                  <a
+                    className="nav-link"
+                    onClick={() => {
+                      this.setActive("addSword");
+                    }}
+                  >
                     Add New Sword
                   </a>
                 </li>
@@ -123,11 +162,14 @@ export default class swordInfo extends React.Component {
           <img src="/images/swordsman.gif" className="img-fluid" />
         </div>
         <div>
-          <SearchBar data={this.state.filteredData} value={this.state.filterOptions} updateFormField={this.updateFormField} onClickUpdate = {this.onClickUpdate} />
+          <SearchBar
+            data={this.state.filteredData}
+            value={this.state.filterOptions}
+            updateFormField={this.updateFormField}
+            onClickUpdate={this.onClickUpdate}
+          />
         </div>
-        <div>
-          {this.renderContent()}
-          </div>
+        <div>{this.renderContent()}</div>
       </React.Fragment>
     );
   }
