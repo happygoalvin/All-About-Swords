@@ -8,13 +8,12 @@ export default class swordInfo extends React.Component {
   state = {
     active: "swordInfo",
     data: [],
-    filteredData: [],
     tagData: [],
     filterOptions: {
       searchName: "",
       searchMinLength: "",
       searchMaxLength: "",
-      tags:[]
+      tags: [],
     },
   };
 
@@ -24,16 +23,8 @@ export default class swordInfo extends React.Component {
     let response = await axios.get(this.base_url + "swords");
     this.setState({
       data: response.data.sword_info,
-      filteredData: response.data.sword_info,
     });
   };
-
-  fetchTagsData = async () => {
-    let response = await axios.get(this.base_url +"tags");
-    this.setState({
-      tagData : response.data.tags
-    })
-  }
 
   componentDidMount() {
     this.fetchSwordData();
@@ -47,27 +38,46 @@ export default class swordInfo extends React.Component {
     });
   };
 
-  onClickUpdate = () => {
-    let filterData = this.state.data.filter((sword) =>
-      sword.name.includes(this.state.filterOptions.searchName)
-    );
+  onClickUpdate = async () => {
+    let filterData = "";
 
+    if (this.state.filterOptions.searchName) {
+      let nameResponse = await axios.get(
+        this.base_url + "swords?name=" + this.state.filterOptions.searchName
+      );
+      filterData = nameResponse.data.sword_info;
+    }
+
+    // http://localhost:3001/swords?lengthGreaterThan=40&lengthLesserThan=100
     if (
       this.state.filterOptions.searchMinLength &&
       this.state.filterOptions.searchMaxLength
     ) {
-      filterData = filterData.filter(
-        (sword) =>
-          sword.blade.length >=
-            Number(this.state.filterOptions.searchMinLength) &&
-          sword.blade.length <= Number(this.state.filterOptions.searchMaxLength)
+      let lengthResponse = await axios.get(
+        this.base_url +
+          "swords?lengthGreaterThan=" +
+          this.state.filterOptions.searchMinLength +
+          "&lengthLesserThan=" +
+          this.state.filterOptions.searchMaxLength
       );
+      filterData = lengthResponse.data.sword_info;
     }
 
+    // if (
+    //   this.state.filterOptions.searchMinLength &&
+    //   this.state.filterOptions.searchMaxLength
+    // ) {
+    //   filterData = filterData.filter(
+    //     (sword) =>
+    //       sword.blade.length >=
+    //         Number(this.state.filterOptions.searchMinLength) &&
+    //       sword.blade.length <= Number(this.state.filterOptions.searchMaxLength)
+    //   );
+    // }
+
     this.setState({
-      filteredData: filterData,
+      data: filterData,
     });
-    console.log(filterData);
   };
 
   onClickValidation = () => {};
@@ -76,7 +86,7 @@ export default class swordInfo extends React.Component {
     if (this.state.active === "swordInfo") {
       return (
         <React.Fragment>
-          <SwordList data={this.state.filteredData} />
+          <SwordList data={this.state.data} />
         </React.Fragment>
       );
     } else if (this.state.active === "addSword") {
@@ -163,7 +173,7 @@ export default class swordInfo extends React.Component {
         </div>
         <div>
           <SearchBar
-            data={this.state.filteredData}
+            data={this.state.data}
             value={this.state.filterOptions}
             updateFormField={this.updateFormField}
             onClickUpdate={this.onClickUpdate}
