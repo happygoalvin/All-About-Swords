@@ -1,8 +1,20 @@
 import React from "react";
+import SearchBar from "./SearchBar";
 
 export default function swordList(props) {
   return (
       <React.Fragment>
+        <div>
+        <SearchBar
+            data={props.data}
+            tagsData = {props.tagsData}
+            value={props.value}
+            updateFormField={props.updateFormField}
+            onClickUpdate={props.onClickUpdate}
+            updateTags={props.updateTags}
+            onChangeUpdate={props.onChangeUpdate}
+          />
+        </div>
         <div className="container">
           <h1 className="d-flex justify-content-center my-3">Sword List</h1>
           {props.data.map((r) => (
@@ -25,7 +37,7 @@ export default function swordList(props) {
                         <li className="list-group-item">Blade Material: {r.blade.metal}</li>
                         <li className="list-group-item">Blade Length: {r.blade.length}{r.blade.uom}</li> 
                         <li className="list-group-item">Fighting Styles: {r.fighting_style.join(', ')}</li>
-                        <li className="list-group-item">Tags: {r.tags.map(t => t.name + " ")}</li>
+                        <li className="list-group-item">Tags: {r.tags.map(t => t.label + " ")}</li>
                       </ul>
                     </div>
                   </div>

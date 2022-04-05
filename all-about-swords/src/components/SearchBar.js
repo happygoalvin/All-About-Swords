@@ -1,6 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
+
+const base_url = "https://all-about-swords-express.herokuapp.com/";
 
 export default function SearchBar(props) {
+  const [selectValue, setSelectValue] = useState([]);
+
+  const [swordTag, setSwordTag] = useState([]);
+
+  useEffect(async () => {
+    let isCancelled = false;
+    // let response = await axios.get(base_url + "swords");
+    let response = await axios.get(base_url + "tags");
+    let temp = response.data.tags;
+    // let temp = response.data.sword_info.map((i) => i.tags.map((t) => t.label));
+    console.log("temp : ", temp);
+    let clone = [];
+
+    if (!isCancelled) {
+      for (let i of temp) {
+        clone.push(i.label);
+      }
+      setSwordTag(clone);
+    }
+
+    return () => {
+      isCancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    props.updateTags(selectValue);
+  }, [selectValue]);
+
   return (
     <React.Fragment>
       <div className="d-flex p-2 justify-content-around">
@@ -33,6 +67,23 @@ export default function SearchBar(props) {
             onChange={props.updateFormField}
             placeholder="Please enter maximum blade length"
           />
+        </div>
+        <div className="col-4">
+        <Autocomplete
+          multiple
+          id="tags-outlined"
+          options={swordTag}
+          value={selectValue}
+          onChange={(e, newValue) => setSelectValue(newValue)}
+          defaultValue={[]}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Filter By Tag"
+              placeholder="Select a tag"
+            />
+          )}
+        />
         </div>
         <div className="col-1">
           <input

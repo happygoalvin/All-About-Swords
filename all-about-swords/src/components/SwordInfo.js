@@ -1,6 +1,5 @@
 import React from "react";
 import SwordList from "./SwordList";
-import SearchBar from "./SearchBar";
 import AddNewSword from "./AddNewSword";
 import axios from "axios";
 
@@ -16,7 +15,14 @@ export default class swordInfo extends React.Component {
       tags: [],
     },
   };
-
+  
+  // @dev updateTags is passed as props to SearchBar component. Use this to update ...this.state['filterOptions']['tags']
+  updateTags = async (x) => {
+    this.setState({
+      ...this.state,
+      filterOptions: { ...this.state.filterOptions, tags: x },
+    });
+  };
   base_url = "https://all-about-swords-express.herokuapp.com/";
 
   fetchSwordData = async () => {
@@ -26,8 +32,17 @@ export default class swordInfo extends React.Component {
     });
   };
 
+  fetchTagData = async () => {
+    let response = await axios.get(this.base_url + "tags");
+    this.setState({
+      tagData: response.data.tags,
+    });
+    console.log(response.data.tags);
+  };
+
   componentDidMount() {
     this.fetchSwordData();
+    this.fetchTagData();
   }
 
   updateFormField = (e) => {
@@ -48,7 +63,6 @@ export default class swordInfo extends React.Component {
       filterData = nameResponse.data.sword_info;
     }
 
-    // http://localhost:3001/swords?lengthGreaterThan=40&lengthLesserThan=100
     if (
       this.state.filterOptions.searchMinLength &&
       this.state.filterOptions.searchMaxLength
@@ -63,30 +77,38 @@ export default class swordInfo extends React.Component {
       filterData = lengthResponse.data.sword_info;
     }
 
-    // if (
-    //   this.state.filterOptions.searchMinLength &&
-    //   this.state.filterOptions.searchMaxLength
-    // ) {
-    //   filterData = filterData.filter(
-    //     (sword) =>
-    //       sword.blade.length >=
-    //         Number(this.state.filterOptions.searchMinLength) &&
-    //       sword.blade.length <= Number(this.state.filterOptions.searchMaxLength)
-    //   );
-    // }
-
+    if (this.state.filterOptions.searchName || this.state.filterOptions.searchMinLength && this.state.filterOptions.searchMaxLength) {
     this.setState({
       data: filterData,
     });
+  }
   };
 
-  onClickValidation = () => {};
+  onChangeUpdate = async () => {
+    let filterData = ""
+
+    if (this.state.filterOptions.tags) {
+      let tagResponse = await axios.get(this.base_url + "swords?tags=" + this.state.filterOptions.tags)
+      filterData = tagResponse.data.sword_info;
+      this.setState({
+        data: filterData,
+      })
+    }
+  }
 
   renderContent() {
     if (this.state.active === "swordInfo") {
       return (
         <React.Fragment>
-          <SwordList data={this.state.data} />
+          <SwordList
+            data={this.state.data}
+            tagsData={this.state.tagData}
+            value={this.state.filterOptions}
+            updateFormField={this.updateFormField}
+            onClickUpdate={this.onClickUpdate}
+            onChangeUpdate={this.onChangeUpdate}
+            updateTags={this.updateTags}
+          />
         </React.Fragment>
       );
     } else if (this.state.active === "addSword") {
@@ -170,14 +192,6 @@ export default class swordInfo extends React.Component {
         </nav>
         <div className="d-flex justify-content-center mt-3">
           <img src="/images/swordsman.gif" className="img-fluid" />
-        </div>
-        <div>
-          <SearchBar
-            data={this.state.data}
-            value={this.state.filterOptions}
-            updateFormField={this.updateFormField}
-            onClickUpdate={this.onClickUpdate}
-          />
         </div>
         <div>{this.renderContent()}</div>
       </React.Fragment>
