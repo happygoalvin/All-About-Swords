@@ -49,7 +49,6 @@ export default class swordInfo extends React.Component {
     this.setState({
       tagData: response.data.tags,
     });
-    console.log(response.data.tags);
   };
 
   componentDidMount() {
@@ -95,7 +94,15 @@ export default class swordInfo extends React.Component {
       filterData = lengthResponse.data.sword_info;
     }
 
-    if (this.state.filterOptions.tags) {
+    let tagsSelected = false;
+
+    if (this.state.filterOptions.tags.length == 0) {
+      tagsSelected = false;
+    } else if (this.state.filterOptions.tags) {
+      tagsSelected = true;
+    }
+
+    if (tagsSelected == true) {
       let tagResponse = await axios.get(
         base_url + "swords?tags=" + this.state.filterOptions.tags
       );
@@ -106,16 +113,12 @@ export default class swordInfo extends React.Component {
       this.state.filterOptions.searchName ||
       (this.state.filterOptions.searchMinLength &&
         this.state.filterOptions.searchMaxLength) ||
-      this.state.filterOptions.tags
+      tagsSelected
     ) {
       this.setState({
         data: filterData,
       });
     }
-  };
-
-  onChangeUpdate = async () => {
-    let filterData = "";
   };
 
   renderContent() {
@@ -128,7 +131,6 @@ export default class swordInfo extends React.Component {
             value={this.state.filterOptions}
             updateFilterOptions={this.updateFilterOptions}
             onClickUpdate={this.onClickUpdate}
-            onChangeUpdate={this.onChangeUpdate}
             updateTags={this.updateTags}
           />
         </React.Fragment>
