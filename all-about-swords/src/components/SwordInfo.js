@@ -2,6 +2,7 @@ import React from "react";
 import SwordList from "./SwordList";
 import AddNewSword from "./AddNewSword";
 import axios from "axios";
+import { base_url } from "../constants";
 
 export default class swordInfo extends React.Component {
   state = {
@@ -15,7 +16,7 @@ export default class swordInfo extends React.Component {
       tags: [],
     },
   };
-  
+
   // @dev updateTags is passed as props to SearchBar component. Use this to update ...this.state['filterOptions']['tags']
   updateTags = async (x) => {
     this.setState({
@@ -23,17 +24,16 @@ export default class swordInfo extends React.Component {
       filterOptions: { ...this.state.filterOptions, tags: x },
     });
   };
-  base_url = "https://all-about-swords-express.herokuapp.com/";
 
   fetchSwordData = async () => {
-    let response = await axios.get(this.base_url + "swords");
+    let response = await axios.get(base_url + "swords");
     this.setState({
       data: response.data.sword_info,
     });
   };
 
   fetchTagData = async () => {
-    let response = await axios.get(this.base_url + "tags");
+    let response = await axios.get(base_url + "tags");
     this.setState({
       tagData: response.data.tags,
     });
@@ -58,7 +58,7 @@ export default class swordInfo extends React.Component {
 
     if (this.state.filterOptions.searchName) {
       let nameResponse = await axios.get(
-        this.base_url + "swords?name=" + this.state.filterOptions.searchName
+        base_url + "swords?name=" + this.state.filterOptions.searchName
       );
       filterData = nameResponse.data.sword_info;
     }
@@ -68,7 +68,7 @@ export default class swordInfo extends React.Component {
       this.state.filterOptions.searchMaxLength
     ) {
       let lengthResponse = await axios.get(
-        this.base_url +
+        base_url +
           "swords?lengthGreaterThan=" +
           this.state.filterOptions.searchMinLength +
           "&lengthLesserThan=" +
@@ -77,24 +77,28 @@ export default class swordInfo extends React.Component {
       filterData = lengthResponse.data.sword_info;
     }
 
-    if (this.state.filterOptions.searchName || this.state.filterOptions.searchMinLength && this.state.filterOptions.searchMaxLength) {
-    this.setState({
-      data: filterData,
-    });
-  }
+    if (this.state.filterOptions.tags) {
+      let tagResponse = await axios.get(
+        base_url + "swords?tags=" + this.state.filterOptions.tags
+      );
+      filterData = tagResponse.data.sword_info;
+    }
+
+    if (
+      this.state.filterOptions.searchName ||
+      (this.state.filterOptions.searchMinLength &&
+        this.state.filterOptions.searchMaxLength) ||
+      this.state.filterOptions.tags
+    ) {
+      this.setState({
+        data: filterData,
+      });
+    }
   };
 
   onChangeUpdate = async () => {
-    let filterData = ""
-
-    if (this.state.filterOptions.tags) {
-      let tagResponse = await axios.get(this.base_url + "swords?tags=" + this.state.filterOptions.tags)
-      filterData = tagResponse.data.sword_info;
-      this.setState({
-        data: filterData,
-      })
-    }
-  }
+    let filterData = "";
+  };
 
   renderContent() {
     if (this.state.active === "swordInfo") {

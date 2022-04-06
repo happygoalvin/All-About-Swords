@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
-
-const base_url = "https://all-about-swords-express.herokuapp.com/";
+import { base_url } from "../constants";
 
 export default function SearchBar(props) {
   const [selectValue, setSelectValue] = useState([]);
@@ -69,21 +68,21 @@ export default function SearchBar(props) {
           />
         </div>
         <div className="col-4">
-        <Autocomplete
-          multiple
-          id="tags-outlined"
-          options={swordTag}
-          value={selectValue}
-          onChange={(e, newValue) => setSelectValue(newValue)}
-          defaultValue={[]}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              label="Filter By Tag"
-              placeholder="Select a tag"
-            />
-          )}
-        />
+          <Autocomplete
+            multiple
+            id="tags-outlined"
+            options={swordTag}
+            value={selectValue}
+            onChange={(e, newValue) => setSelectValue(newValue)}
+            defaultValue={[]}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Filter By Tag"
+                placeholder="Select a tag"
+              />
+            )}
+          />
         </div>
         <div className="col-1">
           <input
