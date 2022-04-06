@@ -138,7 +138,19 @@ export default class swordInfo extends React.Component {
     } else if (this.state.active === "addSword") {
       return (
         <React.Fragment>
-          <AddNewSword />
+          <AddNewSword 
+          newTitle={this.state.newTitle}
+          newOrigin={this.state.newOrigin}
+          newTimePeriodCreated={this.state.newTimePeriodCreated}
+          newImageUrl={this.state.newImageUrl}
+          newBladeMetal={this.state.newBlade.metal}
+          newBladeLength={this.state.newBlade.length}
+          newBladeUom={this.state.newBlade.uom}
+          newDescription={this.state.newDescription}
+          newTags={this.state.newTags}
+          newFightingStyle={this.state.newFightingStyle}
+          updateFormField={this.updateFormField}
+          />
         </React.Fragment>
       );
     }
