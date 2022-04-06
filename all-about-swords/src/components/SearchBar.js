@@ -42,7 +42,7 @@ export default function SearchBar(props) {
           name="searchName"
           value={props.value.searchName}
           className="form-control mx-3 mt-3"
-          onChange={props.updateFormField}
+          onChange={props.updateFilterOptions}
           placeholder="Search by sword name..."
         />
       </div>
@@ -53,7 +53,7 @@ export default function SearchBar(props) {
             name="searchMinLength"
             value={props.value.searchMinLength}
             className="form-control mx-3 mt-3"
-            onChange={props.updateFormField}
+            onChange={props.updateFilterOptions}
             placeholder="Please enter minimum blade length"
           />
         </div>
@@ -63,7 +63,7 @@ export default function SearchBar(props) {
             name="searchMaxLength"
             value={props.value.searchMaxLength}
             className="form-control mx-3 mt-3"
-            onChange={props.updateFormField}
+            onChange={props.updateFilterOptions}
             placeholder="Please enter maximum blade length"
           />
         </div>

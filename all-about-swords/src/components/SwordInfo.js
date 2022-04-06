@@ -45,7 +45,7 @@ export default class swordInfo extends React.Component {
     this.fetchTagData();
   }
 
-  updateFormField = (e) => {
+  updateFilterOptions = (e) => {
     let newOptions = { ...this.state.filterOptions };
     newOptions[e.target.name] = e.target.value;
     this.setState({
@@ -108,7 +108,7 @@ export default class swordInfo extends React.Component {
             data={this.state.data}
             tagsData={this.state.tagData}
             value={this.state.filterOptions}
-            updateFormField={this.updateFormField}
+            updateFilterOptions={this.updateFilterOptions}
             onClickUpdate={this.onClickUpdate}
             onChangeUpdate={this.onChangeUpdate}
             updateTags={this.updateTags}

@@ -9,7 +9,7 @@ export default function swordList(props) {
             data={props.data}
             tagsData = {props.tagsData}
             value={props.value}
-            updateFormField={props.updateFormField}
+            updateFilterOptions={props.updateFilterOptions}
             onClickUpdate={props.onClickUpdate}
             updateTags={props.updateTags}
             onChangeUpdate={props.onChangeUpdate}
