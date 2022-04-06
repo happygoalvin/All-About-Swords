@@ -28,7 +28,7 @@ export default function SearchBar(props) {
   }, []);
 
   useEffect(() => {
-    props.updateTags(selectValue);
+    props.updateTagsFilter(selectValue);
   }, [selectValue]);
 
   return (

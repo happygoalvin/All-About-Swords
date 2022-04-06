@@ -11,7 +11,7 @@ export default function swordList(props) {
             value={props.value}
             updateFilterOptions={props.updateFilterOptions}
             onClickUpdate={props.onClickUpdate}
-            updateTags={props.updateTags}
+            updateTagsFilter={props.updateTagsFilter}
           />
         </div>
         <div className="container">

@@ -18,9 +18,11 @@ export default class swordInfo extends React.Component {
     newTitle: "",
     newOrigin: "",
     newDescription: "",
-    newBladeMetal: "",
-    newBladeLength: "",
-    newBladeUom: "cm",
+    newBlade: {
+      metal: "",
+      length: "",
+      uom: "cm",
+    },
     newImageUrl: "",
     newTimePeriodCreated: "",
     newTags: [],
@@ -28,7 +30,7 @@ export default class swordInfo extends React.Component {
   };
 
   // @dev updateTags is passed as props to SearchBar component. Use this to update ...this.state['filterOptions']['tags']
-  updateTags = async (x) => {
+  updateTagsFilter = async (x) => {
     this.setState({
       ...this.state,
       filterOptions: { ...this.state.filterOptions, tags: x },
@@ -60,12 +62,59 @@ export default class swordInfo extends React.Component {
     });
   };
 
+  updateTags = (e) => {
+    if (this.state.newTags.includes(e.target.value)) {
+      let indexToRemove = this.state.newTags.findIndex((t) => {
+        return t === e.target.value;
+      });
+
+      let clone = [
+        ...this.state.newTags.slice(0, indexToRemove),
+        ...this.state.newTags.slice(indexToRemove + 1),
+      ];
+      this.setState({
+        newTags: clone,
+      });
+    } else {
+      let clone = [...this.state.newTags, e.target.value];
+      this.setState({
+        newTags: clone,
+      });
+    }
+  };
+
+  updateBladeField = (e) => {
+    let newBladeValues = { ...this.state.newBlade };
+    newBladeValues[e.target.name] = e.target.value;
+    this.setState({
+      newBlade: newBladeValues,
+    });
+  };
+
   updateFilterOptions = (e) => {
     let newOptions = { ...this.state.filterOptions };
     newOptions[e.target.name] = e.target.value;
     this.setState({
       filterOptions: newOptions,
     });
+  };
+
+  addNewSword = async () => {
+    let response = await axios.post(this.base_url + "swords", {
+      name: this.state.newTitle,
+      origin: this.state.newOrigin,
+      time_period_created: this.state.newTimePeriodCreated,
+      image_url: this.state.newImageUrl,
+      description: this.state.newDescription,
+      blade: this.state.newBlade,
+      fighting_style: this.state.newFightingStyle.split(","),
+      tags: this.state.newTags
+    });
+
+    console.log(this.props.processAddNewSword(response.data[0]))
+    this.setState({
+      'active': 'swordInfo'
+    })
   };
 
   onClickUpdate = async () => {
@@ -129,26 +178,29 @@ export default class swordInfo extends React.Component {
             value={this.state.filterOptions}
             updateFilterOptions={this.updateFilterOptions}
             onClickUpdate={this.onClickUpdate}
-            updateTags={this.updateTags}
+            updateTagsFilter={this.updateTagsFilter}
           />
         </React.Fragment>
       );
     } else if (this.state.active === "addSword") {
       return (
         <React.Fragment>
-          <AddNewSword 
-          newTitle={this.state.newTitle}
-          newOrigin={this.state.newOrigin}
-          newTimePeriodCreated={this.state.newTimePeriodCreated}
-          newImageUrl={this.state.newImageUrl}
-          newBladeMetal={this.state.newBladeMetal}
-          newBladeLength={this.state.newBladeLength}
-          newBladeUom={this.state.newBladeUom}
-          newDescription={this.state.newDescription}
-          newTags={this.state.newTags}
-          newFightingStyle={this.state.newFightingStyle}
-          tagData={this.state.tagData}
-          updateFormField={this.updateFormField}
+          <AddNewSword
+            newTitle={this.state.newTitle}
+            newOrigin={this.state.newOrigin}
+            newTimePeriodCreated={this.state.newTimePeriodCreated}
+            newImageUrl={this.state.newImageUrl}
+            newBladeMetal={this.state.newBlade.metal}
+            newBladeLength={this.state.newBlade.length}
+            newBladeUom={this.state.newBlade.uom}
+            newDescription={this.state.newDescription}
+            newTags={this.state.newTags}
+            updateTags={this.updateTags}
+            newFightingStyle={this.state.newFightingStyle}
+            tagData={this.state.tagData}
+            updateFormField={this.updateFormField}
+            updateBladeField={this.updateBladeField}
+            addNewSword={this.addNewSword}
           />
         </React.Fragment>
       );

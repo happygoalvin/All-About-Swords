@@ -1,7 +1,9 @@
 import React from "react";
 
-
 export default function AddNewSword(props) {
+
+  
+
   return (
     <React.Fragment>
       <div className="container">
@@ -60,9 +62,9 @@ export default function AddNewSword(props) {
               <input
                 type="text"
                 className="form-control"
-                name="newBladeMetal"
+                name="metal"
                 value={props.newBladeMetal}
-                onChange={props.updateFormField}
+                onChange={props.updateBladeField}
               />
             </div>
             <div className="col-md-4">
@@ -70,9 +72,9 @@ export default function AddNewSword(props) {
               <input
                 className="form-control"
                 type="number"
-                name="newBladeLength"
+                name="length"
                 value={props.newBladeLength}
-                onChange={props.updateFormField}
+                onChange={props.updateBladeField}
               />
             </div>
             <div className="col-md-4">
@@ -80,9 +82,9 @@ export default function AddNewSword(props) {
               <input
                 className="form-control"
                 type="text"
-                name="newBladeUom"
+                name="uom"
                 value={props.newBladeUom}
-                onChange={props.updateFormField}
+                onChange={props.updateBladeField}
                 disabled
               />
             </div>
@@ -99,18 +101,35 @@ export default function AddNewSword(props) {
           <div className="row">
             <div className="col-md-6">
               <label className="form-label my-1">Fighting Styles</label>
-              <input
+              <textarea
                 className="form-control"
                 type="text"
                 name="newFightingStyle"
                 value={props.newFightingStyle}
                 onChange={props.updateFormField}
-              />
+              ></textarea>
             </div>
             <div className="col-md-6">
-              <label class="form-label my-1">Tags</label>
-              <input type="checkbox" name="newTags" value={props.tagData} />
-              <span></span>
+              <label className="form-label my-2">Tags</label>
+              {props.tagData.map((t) => {
+                return (
+                  <React.Fragment key={t.value}>
+                    <div className="form-check">
+                      <input
+                        type="checkbox"
+                        name="newTags"
+                        value={t.value}
+                        onChange={props.updateTags}
+                        checked={props.newTags.includes(t.value)}
+                      />
+                      <label className="form-check-label mx-2">{t.label}</label>
+                    </div>
+                  </React.Fragment>
+                );
+              })}
+            </div>
+            <div className="my-2">
+              <button className="mt-3 btn btn-primary" onClick={props.addNewSword} >Add New Sword</button>
             </div>
           </div>
         </div>
