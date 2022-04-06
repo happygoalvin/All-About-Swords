@@ -44,17 +44,68 @@ export default function AddNewSword(props) {
           </div>
           <div className="col-md-6 col-lg-4">
             <label className="form-label my-1">Image URL</label>
-            <input 
-            type="text"
-            className="form-control"
-            name="newImageUrl"
-            value={props.newImageUrl}
-            onChange={props.updateFormField}
+            <input
+              type="text"
+              className="form-control"
+              name="newImageUrl"
+              value={props.newImageUrl}
+              onChange={props.updateFormField}
             />
           </div>
+          <div className="row">
+            <h4 className="my-2">Blade Details</h4>
+            <div className="col-md-4">
+              <label className="form-label my-1">Metal</label>
+              <input
+                type="text"
+                className="form-control"
+                name="newBladeMetal"
+                value={props.newBladeMetal}
+                onChange={props.updateFormField}
+              />
+            </div>
+            <div className="col-md-4">
+              <label className="form-label my-1">Length</label>
+              <input
+                className="form-control"
+                type="number"
+                name="newBladeLength"
+                value={props.newBladeLength}
+                onChange={props.updateFormField}
+              />
+            </div>
+            <div className="col-md-4">
+              <label className="form-label my-1">Unit of Measurement</label>
+              <input
+                className="form-control"
+                type="text"
+                name="newBladeUom"
+                value={props.newBladeUom}
+                onChange={props.updateFormField}
+                disabled
+              />
+            </div>
+          </div>
           <div>
-            <label className="form-label my-1">Description</label>
-            <textarea className="form-control" name="newDescription" value={props.newDescription} onChange={props.updateFormField} ></textarea>
+            <h4 className="my-2">Description</h4>
+            <textarea
+              className="form-control"
+              name="newDescription"
+              value={props.newDescription}
+              onChange={props.updateFormField}
+            ></textarea>
+          </div>
+          <div className="row">
+            <div className="col-md-6">
+              <label className="form-label my-1">Fighting Styles</label>
+              <input
+                className="form-control"
+                type="text"
+                name="newFightingStyle"
+                value={props.newFightingStyle}
+                onChange={props.updateFormField}
+              />
+            </div>
           </div>
         </div>
       </div>

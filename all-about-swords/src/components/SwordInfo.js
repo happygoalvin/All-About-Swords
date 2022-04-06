@@ -18,11 +18,9 @@ export default class swordInfo extends React.Component {
     newTitle: "",
     newOrigin: "",
     newDescription: "",
-    newBlade: {
-      metal: "",
-      length: "",
-      uom: "cm",
-    },
+    newBladeMetal: "",
+    newBladeLength: "",
+    newBladeUom: "cm",
     newImageUrl: "",
     newTimePeriodCreated: "",
     newTags: [],
@@ -96,13 +94,13 @@ export default class swordInfo extends React.Component {
 
     let tagsSelected = false;
 
-    if (this.state.filterOptions.tags.length == 0) {
+    if (this.state.filterOptions.tags.length === 0) {
       tagsSelected = false;
     } else if (this.state.filterOptions.tags) {
       tagsSelected = true;
     }
 
-    if (tagsSelected == true) {
+    if (tagsSelected === true) {
       let tagResponse = await axios.get(
         base_url + "swords?tags=" + this.state.filterOptions.tags
       );
@@ -143,12 +141,13 @@ export default class swordInfo extends React.Component {
           newOrigin={this.state.newOrigin}
           newTimePeriodCreated={this.state.newTimePeriodCreated}
           newImageUrl={this.state.newImageUrl}
-          newBladeMetal={this.state.newBlade.metal}
-          newBladeLength={this.state.newBlade.length}
-          newBladeUom={this.state.newBlade.uom}
+          newBladeMetal={this.state.newBladeMetal}
+          newBladeLength={this.state.newBladeLength}
+          newBladeUom={this.state.newBladeUom}
           newDescription={this.state.newDescription}
           newTags={this.state.newTags}
           newFightingStyle={this.state.newFightingStyle}
+          tagData={this.state.tagData}
           updateFormField={this.updateFormField}
           />
         </React.Fragment>
@@ -165,7 +164,7 @@ export default class swordInfo extends React.Component {
       <React.Fragment>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <div className="container-fluid">
-            <a className="navbar-brand" href="#">
+            <a className="navbar-brand">
               <img
                 src="/images/sword-logo.svg"
                 alt=""
