@@ -3,7 +3,10 @@ import React from "react";
 export default function AddNewSword(props) {
   return (
     <React.Fragment>
-      <h1>Add New Sword Info</h1>
+      <div className="container">
+      <h1 className="d-flex justify-content-center my-3">Add New Sword Info</h1>
+      
+      </div>
     </React.Fragment>
   );
 }

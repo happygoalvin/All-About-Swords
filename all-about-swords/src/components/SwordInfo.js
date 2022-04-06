@@ -21,12 +21,12 @@ export default class swordInfo extends React.Component {
     newBlade: {
       metal: "",
       length: "",
-      uom: "cm"
+      uom: "cm",
     },
-    newImageUrl:"",
-    newTimePeriodCreated:"",
-    newTags:[],
-    newFightingStyle:[]
+    newImageUrl: "",
+    newTimePeriodCreated: "",
+    newTags: [],
+    newFightingStyle: [],
   };
 
   // @dev updateTags is passed as props to SearchBar component. Use this to update ...this.state['filterOptions']['tags']
@@ -59,9 +59,9 @@ export default class swordInfo extends React.Component {
 
   updateFormField = (e) => {
     this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
 
   updateFilterOptions = (e) => {
     let newOptions = { ...this.state.filterOptions };
@@ -196,16 +196,6 @@ export default class swordInfo extends React.Component {
                     }}
                   >
                     Add New Sword
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="#">
-                    Fighting Styles
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="#">
-                    Add New Fighting Style
                   </a>
                 </li>
               </ul>
