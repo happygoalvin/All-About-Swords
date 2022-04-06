@@ -1,5 +1,6 @@
 import React from "react";
 
+
 export default function AddNewSword(props) {
   return (
     <React.Fragment>
@@ -105,6 +106,11 @@ export default function AddNewSword(props) {
                 value={props.newFightingStyle}
                 onChange={props.updateFormField}
               />
+            </div>
+            <div className="col-md-6">
+              <label class="form-label my-1">Tags</label>
+              <input type="checkbox" name="newTags" value={props.tagData} />
+              <span></span>
             </div>
           </div>
         </div>
