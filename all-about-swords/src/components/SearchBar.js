@@ -11,15 +11,12 @@ export default function SearchBar(props) {
 
   useEffect(async () => {
     let isCancelled = false;
-    // let response = await axios.get(base_url + "swords");
     let response = await axios.get(base_url + "tags");
-    let temp = response.data.tags;
-    // let temp = response.data.sword_info.map((i) => i.tags.map((t) => t.label));
-    console.log("temp : ", temp);
+    let tagData = response.data.tags;
     let clone = [];
 
     if (!isCancelled) {
-      for (let i of temp) {
+      for (let i of tagData) {
         clone.push(i.label);
       }
       setSwordTag(clone);

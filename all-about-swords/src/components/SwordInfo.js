@@ -15,6 +15,18 @@ export default class swordInfo extends React.Component {
       searchMaxLength: "",
       tags: [],
     },
+    newTitle: "",
+    newOrigin: "",
+    newDescription: "",
+    newBlade: {
+      metal: "",
+      length: "",
+      uom: "cm"
+    },
+    newImageUrl:"",
+    newTimePeriodCreated:"",
+    newTags:[],
+    newFightingStyle:[]
   };
 
   // @dev updateTags is passed as props to SearchBar component. Use this to update ...this.state['filterOptions']['tags']
@@ -43,6 +55,12 @@ export default class swordInfo extends React.Component {
   componentDidMount() {
     this.fetchSwordData();
     this.fetchTagData();
+  }
+
+  updateFormField = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
   }
 
   updateFilterOptions = (e) => {
