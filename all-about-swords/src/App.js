@@ -1,13 +1,13 @@
 import React from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import SwordInfo from "./components/SwordInfo";
+import Main from "./components/Main";
 
 function App() {
   return (
     <React.Fragment>
       <div className="App">
-        <SwordInfo />
+        <Main />
       </div>
     </React.Fragment>
   );

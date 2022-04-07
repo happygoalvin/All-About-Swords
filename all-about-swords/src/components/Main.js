@@ -1,6 +1,7 @@
 import React from "react";
 import SwordList from "./SwordList";
 import AddNewSword from "./AddNewSword";
+import EditSelectedSword from "./EditSelectedSword";
 import axios from "axios";
 import { base_url } from "../constants";
 
@@ -27,6 +28,7 @@ export default class swordInfo extends React.Component {
     newTimePeriodCreated: "",
     newTags: [],
     newFightingStyle: [],
+    selectedSword:{}
   };
 
   // @dev updateTags is passed as props to SearchBar component. Use this to update ...this.state['filterOptions']['tags']
@@ -170,6 +172,29 @@ export default class swordInfo extends React.Component {
     }
   };
 
+  updateSelectedSword = (chosenSword) => {
+    this.setState({
+      active: "editSword",
+      selectedSword: chosenSword
+    })
+  }
+
+  editFormField = (e) => {
+    let selectedSwordInfo = {...this.state.selectedSword};
+    selectedSwordInfo[e.target.name] = e.target.value;
+    this.setState({
+      selectedSword: selectedSwordInfo
+    })
+  }
+
+  editBladeField = (e) => {
+    let selectedBladeInfo = {...this.state.selectedSword.blade};
+    selectedBladeInfo[e.target.name] = e.target.value;
+    this.setState({
+      selectedSword: selectedBladeInfo
+    })
+  }
+
   renderContent() {
     if (this.state.active === "swordInfo") {
       return (
@@ -181,6 +206,8 @@ export default class swordInfo extends React.Component {
             updateFilterOptions={this.updateFilterOptions}
             onClickUpdate={this.onClickUpdate}
             updateTagsFilter={this.updateTagsFilter}
+            selectedSword={this.state.selectedSword}
+            updateSelectedSword={this.updateSelectedSword}
           />
         </React.Fragment>
       );
@@ -206,6 +233,17 @@ export default class swordInfo extends React.Component {
           />
         </React.Fragment>
       );
+    } else if (this.state.active === "editSword") {
+      return (<React.Fragment>
+        <EditSelectedSword 
+        tagData={this.state.tagData}
+        newTags={this.state.newTags}
+        editBladeField={this.editBladeField}
+        selectedSword={this.state.selectedSword}
+        updateFormField={this.updateFormField}
+        editFormField={this.editFormField}
+        />
+      </React.Fragment>)
     }
   }
 
@@ -269,9 +307,6 @@ export default class swordInfo extends React.Component {
             </div>
           </div>
         </nav>
-        <div className="d-flex justify-content-center mt-3">
-          <img src="/images/swordsman.gif" className="img-fluid" />
-        </div>
         <div>{this.renderContent()}</div>
       </React.Fragment>
     );

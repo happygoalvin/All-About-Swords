@@ -1,9 +1,13 @@
 import React from "react";
 import SearchBar from "./SearchBar";
+import EditSelectedSword from "./EditSelectedSword";
 
 export default function swordList(props) {
   return (
       <React.Fragment>
+        <div className="d-flex justify-content-center mt-3">
+          <img src="/images/swordsman.gif" className="img-fluid" />
+        </div>
         <div>
         <SearchBar
             data={props.data}
@@ -38,6 +42,7 @@ export default function swordList(props) {
                         <li className="list-group-item">Fighting Styles: {r.fighting_style.join(', ')}</li>
                         <li className="list-group-item">Tags: {r.tags.map(t => t.label + " ")}</li>
                       </ul>
+                      <button onClick={() => props.updateSelectedSword(r)}>Edit</button>
                     </div>
                   </div>
                 </div>
