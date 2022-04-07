@@ -73,7 +73,7 @@ export default function AddNewSword(props) {
                 className="form-control"
                 type="number"
                 name="length"
-                value={props.newBladeLength}
+                value={props.newBladeLength + ""}
                 onChange={props.updateBladeField}
               />
             </div>
@@ -130,6 +130,7 @@ export default function AddNewSword(props) {
             </div>
             <div className="my-2">
               <button className="mt-3 btn btn-primary" onClick={props.addNewSword} >Add New Sword</button>
+              <button className="mt-3 mx-2 btn btn-danger" onClick={props.cancelAddNew}>Cancel</button>
             </div>
           </div>
         </div>

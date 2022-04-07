@@ -128,9 +128,15 @@ export default function EditNewSword(props) {
             <div className="my-2">
               <button
                 className="mt-3 btn btn-primary"
-                onClick={props.addNewSword}
+                onClick={props.editSword}
               >
                 Submit
+              </button>
+              <button
+              className="mt-3 btn btn-danger"
+              onClick={props.cancelEdit}
+              >
+                  Cancel
               </button>
             </div>
           </div>
