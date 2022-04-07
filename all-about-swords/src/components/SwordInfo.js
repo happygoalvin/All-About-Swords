@@ -100,7 +100,8 @@ export default class swordInfo extends React.Component {
   };
 
   addNewSword = async () => {
-    let response = await axios.post(this.base_url + "swords", {
+
+    let response = await axios.post(base_url + "swords", {
       name: this.state.newTitle,
       origin: this.state.newOrigin,
       time_period_created: this.state.newTimePeriodCreated,
@@ -110,10 +111,11 @@ export default class swordInfo extends React.Component {
       fighting_style: this.state.newFightingStyle.split(","),
       tags: this.state.newTags
     });
-
-    console.log(this.props.processAddNewSword(response.data[0]))
+    let swordRequest = axios.get(base_url + "swords");
+    let swordResponse = await swordRequest
     this.setState({
-      'active': 'swordInfo'
+      data: swordResponse.data.sword_info,
+      active: 'swordInfo'
     })
   };
 
