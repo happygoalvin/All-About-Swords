@@ -8,7 +8,7 @@ export default function EditNewSword(props) {
       <div className="container">
         <h1 className="d-flex justify-content-center my-3">Edit Sword Info</h1>
         <p className="d-flex justify-content-center">
-          Noticed wrong facts on this sword? Do help the community by providing
+          Noticed wrong facts on the {props.selectedSword.name}? Do help the community by providing
           factual information. Thank you for your contribution.
         </p>
         <div className="row">
@@ -70,8 +70,8 @@ export default function EditNewSword(props) {
                 className="form-control"
                 type="number"
                 name="length"
-                value={props.newBladeLength}
-                onChange={props.updateBladeField}
+                value={props.selectedSword.blade.length}
+                onChange={props.editBladeField}
               />
             </div>
             <div className="col-md-4">
@@ -80,8 +80,8 @@ export default function EditNewSword(props) {
                 className="form-control"
                 type="text"
                 name="uom"
-                value={props.newBladeUom}
-                onChange={props.updateBladeField}
+                value={props.selectedSword.blade.uom}
+                onChange={props.editBladeField}
                 disabled
               />
             </div>
@@ -91,8 +91,8 @@ export default function EditNewSword(props) {
             <textarea
               className="form-control"
               name="newDescription"
-              value={props.newDescription}
-              onChange={props.updateFormField}
+              value={props.selectedSword.description}
+              onChange={props.editFormField}
             ></textarea>
           </div>
           <div className="row">
@@ -101,9 +101,9 @@ export default function EditNewSword(props) {
               <textarea
                 className="form-control"
                 type="text"
-                name="newFightingStyle"
-                value={props.newFightingStyle}
-                onChange={props.updateFormField}
+                name="fighting_style"
+                value={props.selectedSword.fighting_style}
+                onChange={props.editFormField}
               ></textarea>
             </div>
             <div className="col-md-6">
@@ -130,7 +130,7 @@ export default function EditNewSword(props) {
                 className="mt-3 btn btn-primary"
                 onClick={props.addNewSword}
               >
-                Add New Sword
+                Submit
               </button>
             </div>
           </div>

@@ -28,7 +28,7 @@ export default class swordInfo extends React.Component {
     newTimePeriodCreated: "",
     newTags: [],
     newFightingStyle: [],
-    selectedSword:{}
+    selectedSword: {},
   };
 
   // @dev updateTags is passed as props to SearchBar component. Use this to update ...this.state['filterOptions']['tags']
@@ -74,6 +74,7 @@ export default class swordInfo extends React.Component {
         ...this.state.newTags.slice(0, indexToRemove),
         ...this.state.newTags.slice(indexToRemove + 1),
       ];
+
       this.setState({
         newTags: clone,
       });
@@ -102,7 +103,6 @@ export default class swordInfo extends React.Component {
   };
 
   addNewSword = async () => {
-
     let response = await axios.post(base_url + "swords", {
       name: this.state.newTitle,
       origin: this.state.newOrigin,
@@ -111,14 +111,14 @@ export default class swordInfo extends React.Component {
       description: this.state.newDescription,
       blade: this.state.newBlade,
       fighting_style: this.state.newFightingStyle.split(","),
-      tags: this.state.newTags
+      tags: this.state.newTags,
     });
     let swordRequest = axios.get(base_url + "swords");
-    let swordResponse = await swordRequest
+    let swordResponse = await swordRequest;
     this.setState({
       data: swordResponse.data.sword_info,
-      active: 'swordInfo'
-    })
+      active: "swordInfo",
+    });
   };
 
   onClickUpdate = async () => {
@@ -175,25 +175,25 @@ export default class swordInfo extends React.Component {
   updateSelectedSword = (chosenSword) => {
     this.setState({
       active: "editSword",
-      selectedSword: chosenSword
-    })
-  }
+      selectedSword: chosenSword,
+    });
+  };
 
   editFormField = (e) => {
-    let selectedSwordInfo = {...this.state.selectedSword};
+    let selectedSwordInfo = { ...this.state.selectedSword };
     selectedSwordInfo[e.target.name] = e.target.value;
     this.setState({
-      selectedSword: selectedSwordInfo
-    })
-  }
+      selectedSword: selectedSwordInfo,
+    });
+  };
 
   editBladeField = (e) => {
-    let selectedBladeInfo = {...this.state.selectedSword.blade};
-    selectedBladeInfo[e.target.name] = e.target.value;
+    let selectedBladeInfo = { ...this.state.selectedSword };
+    selectedBladeInfo.blade[e.target.name] = e.target.value;
     this.setState({
-      selectedSword: selectedBladeInfo
-    })
-  }
+      selectedSword: selectedBladeInfo,
+    });
+  };
 
   renderContent() {
     if (this.state.active === "swordInfo") {
@@ -234,16 +234,20 @@ export default class swordInfo extends React.Component {
         </React.Fragment>
       );
     } else if (this.state.active === "editSword") {
-      return (<React.Fragment>
-        <EditSelectedSword 
-        tagData={this.state.tagData}
-        newTags={this.state.newTags}
-        editBladeField={this.editBladeField}
-        selectedSword={this.state.selectedSword}
-        updateFormField={this.updateFormField}
-        editFormField={this.editFormField}
-        />
-      </React.Fragment>)
+      return (
+        <React.Fragment>
+          <EditSelectedSword
+            tagData={this.state.tagData}
+            newTags={this.state.newTags}
+            editBladeField={this.editBladeField}
+            selectedSword={this.state.selectedSword}
+            updateFormField={this.updateFormField}
+            editFormField={this.editFormField}
+            updateTags={this.updateTags}
+            editTags={this.editTags}
+          />
+        </React.Fragment>
+      );
     }
   }
 
