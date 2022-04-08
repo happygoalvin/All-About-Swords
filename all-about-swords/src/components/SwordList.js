@@ -4,10 +4,8 @@ import SearchBar from "./SearchBar";
 export default function swordList(props) {
   return (
     <React.Fragment>
-      <div className="d-flex justify-content-center mt-3">
-        <img src="/images/swordsman.gif" className="img-fluid" />
-      </div>
-      <div>
+      <div className="row">
+      <div className="col-12 col-lg-3 col-xl-2">
         <SearchBar
           data={props.data}
           tagsData={props.tagsData}
@@ -17,8 +15,11 @@ export default function swordList(props) {
           updateTagsFilter={props.updateTagsFilter}
         />
       </div>
-      <div className="container">
-        <h1 className="d-flex justify-content-center my-3">Sword List</h1>
+      <div className="col-12 col-lg-9 col-xl-10">
+        <h3 className="d-flex justify-content-center my-3">Sword Catalogue</h3>
+      <div className="d-flex justify-content-center mb-3">
+        <img src="/images/swordsman.gif" className="img-fluid" />
+      </div>
         {props.data.map((r) => (
           <React.Fragment key={r._id}>
             <div className="card lg-3" style={{ maxWidth: "100%" }}>
@@ -50,7 +51,7 @@ export default function swordList(props) {
                         Tags: {r.tags.map((t) => t.label + " ")}
                       </li>
                     </ul>
-                    <div className="d-flex mt-3 justify-content-end">
+                    <div>
                       <button
                         className="btn btn-success mx-1"
                         onClick={() => props.updateSelectedSword(r)}
@@ -70,6 +71,7 @@ export default function swordList(props) {
             </div>
           </React.Fragment>
         ))}
+        </div>
       </div>
     </React.Fragment>
   );

@@ -33,63 +33,60 @@ export default function SearchBar(props) {
 
   return (
     <React.Fragment>
-      <div className="d-flex p-2 justify-content-around">
+      
+          <h6>Filter Options</h6>
         <input
           type="text"
           name="searchName"
           value={props.value.searchName}
-          className="form-control mx-3 mt-3"
+          className="form-control mt-3"
           onChange={props.updateFilterOptions}
           placeholder="Search by sword name..."
         />
-      </div>
-      <div className="row">
-        <div className="col-3">
-          <input
-            type="number"
-            name="searchMinLength"
-            value={props.value.searchMinLength}
-            className="form-control mx-3 mt-3"
-            onChange={props.updateFilterOptions}
-            placeholder="Please enter minimum blade length"
+        
+        
+          <h6>Search by Blade Length</h6>
+      <input
+        type="number"
+        name="searchMinLength"
+        value={props.value.searchMinLength}
+        className="form-control mt-2"
+        onChange={props.updateFilterOptions}
+        placeholder="Please enter minimum blade length"
+      />
+      
+      <input
+        type="number"
+        name="searchMaxLength"
+        value={props.value.searchMaxLength}
+        className="form-control mx-3 mt-3"
+        onChange={props.updateFilterOptions}
+        placeholder="Please enter maximum blade length"
+      />
+      
+      <Autocomplete
+        multiple
+        id="tags-outlined"
+        options={swordTag}
+        value={selectValue}
+        onChange={(e, newValue) => setSelectValue(newValue)}
+        defaultValue={[]}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label="Filter By Tag"
+            placeholder="Select a tag"
           />
-        </div>
-        <div className="col-3">
-          <input
-            type="number"
-            name="searchMaxLength"
-            value={props.value.searchMaxLength}
-            className="form-control mx-3 mt-3"
-            onChange={props.updateFilterOptions}
-            placeholder="Please enter maximum blade length"
-          />
-        </div>
-        <div className="col-4">
-          <Autocomplete
-            multiple
-            id="tags-outlined"
-            options={swordTag}
-            value={selectValue}
-            onChange={(e, newValue) => setSelectValue(newValue)}
-            defaultValue={[]}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label="Filter By Tag"
-                placeholder="Select a tag"
-              />
-            )}
-          />
-        </div>
-        <div className="col-1">
-          <input
-            type="submit"
-            className="btn btn-primary btn-sm mt-3 p-2"
-            onClick={props.onClickUpdate}
-            value="Submit"
-          />
-        </div>
-      </div>
+        )}
+      />
+      
+      <input
+        type="submit"
+        className="btn btn-primary btn-sm mt-3 p-2"
+        onClick={props.onClickUpdate}
+        value="Submit"
+      />
+      
     </React.Fragment>
   );
 }

@@ -340,13 +340,13 @@ export default class swordInfo extends React.Component {
       <React.Fragment>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <div className="container-fluid">
-            <a className="navbar-brand">
+            <a className="navbar-brand" onClick={() => {this.setState({active:"main"})}}>
               <img
                 src="/images/sword-logo.svg"
                 alt=""
                 width="30"
                 height="30"
-                className="d-inline-block align-text-top"
+                className="d-inline-block align-text-center mx-3"
               />
               All About Swords
             </a>
@@ -365,7 +365,7 @@ export default class swordInfo extends React.Component {
               className="collapse navbar-collapse"
               id="navbarSupportedContent"
             >
-              <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+              <ul className="navbar-nav ms-auto mb-2 mb-lg-1">
                 <li className="nav-item">
                   <a
                     className="nav-link active"
@@ -391,7 +391,7 @@ export default class swordInfo extends React.Component {
             </div>
           </div>
         </nav>
-        <div>{this.renderContent()}</div>
+        <div className="container-fluid">{this.renderContent()}</div>
       </React.Fragment>
     );
   }

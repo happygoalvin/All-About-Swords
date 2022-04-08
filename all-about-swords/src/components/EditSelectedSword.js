@@ -133,7 +133,7 @@ export default function EditNewSword(props) {
                 Submit
               </button>
               <button
-              className="mt-3 btn btn-danger"
+              className="mt-3 mx-2 btn btn-danger"
               onClick={props.cancelEdit}
               >
                   Cancel
