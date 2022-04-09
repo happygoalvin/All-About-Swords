@@ -1,0 +1,141 @@
+@import url("https://fonts.googleapis.com/css2?family=Spectral:wght@400;600&display=swap");
+
+.App {
+  overflow-x: hidden;
+  font-family: "Spectral", serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.card-body {
+  font-family: "Spectral", serif;
+  font-weight: 400;
+  font-size: 1.1rem;
+}
+
+#tags-outlined {
+  font-family: "Spectral", serif;
+  font-weight: 400;
+}
+
+.navbar {
+  background-color: #eaddca !important;
+  color: #1f1d1a !important;
+}
+
+.navbar-brand {
+  cursor: pointer;
+}
+
+.navbar-brand:hover {
+  color: #fffdf6 !important;
+  transition: color 0.3s ease-in-out;
+}
+
+.nav-link {
+  cursor: pointer;
+  color: #1f1d1a !important;
+}
+
+.nav-link:hover {
+  color: #fffdf6 !important;
+  transition: color 0.3s ease-in-out;
+}
+
+.filter {
+  background-color: #eaddca;
+}
+
+.form-control {
+  background-color: #eaddca !important;
+  border: 1px solid rgba(0, 0, 0, 0.35) !important;
+}
+
+.s-btn:hover {
+  color: #fffdf6 !important;
+}
+
+.swordCatalogue {
+  background-color: #fffdf6 !important;
+}
+
+.card-body {
+  background-color: #fffdf6 !important;
+}
+
+.card-content {
+  max-height: 20rem;
+  overflow-y: scroll;
+}
+
+.list-group-item {
+  background-color: #fffaee !important;
+}
+
+.btn-success {
+  background-color: #fffdf6 !important;
+  border-color: #fffdf6 !important;
+  color: #1f1d1a !important;
+}
+
+.btn-danger {
+  background-color: #fffdf6 !important;
+  border-color: #fffdf6 !important;
+  color: #1f1d1a !important;
+}
+
+.btn-danger:hover {
+  background-color: #dc3545 !important;
+  transition: 0.3s ease-in-out;
+  color: #fffdf6 !important;
+}
+
+.btn-success:hover {
+  background-color: #198754 !important;
+  transition: 0.3s ease-in-out;
+}
+
+.btn-primary {
+  background-color: #fffdf6 !important;
+  border-color: #fffdf6 !important;
+  color: #1f1d1a !important;
+}
+
+.btn-primary:hover {
+  background-color: #0d6efd !important;
+  transition: 0.3s ease-in-out;
+  color: #fffdf6 !important;
+}
+
+i {
+  color: #1f1d1a;
+}
+
+i:hover {
+  color: #fffdf6 !important;
+  transition: 0.2s ease-in-out;
+}
+
+.addNew {
+  background-color: #fffdf6 !important;
+}
+
+#submit {
+  border: 1px solid rgba(0, 0, 0, 0.35) !important;
+}
+
+#cancel {
+  border: 1px solid rgba(0, 0, 0, 0.35) !important;
+}
+
+#uom {
+  background-color: #a49e8d !important;
+}
+
+.warning {
+  background-color: #fffdf6 !important;
+}
+
+.text-danger {
+  font-size: .9rem !important;
+}
