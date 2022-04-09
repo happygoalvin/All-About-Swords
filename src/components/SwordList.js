@@ -20,7 +20,7 @@ export default function swordList(props) {
       <div className="col-12 col-lg-9 col-xl-10 swordCatalogue">
         <h3 className="d-flex justify-content-center my-3">Sword Catalogue</h3>
       <div className="d-flex justify-content-center mb-3">
-        <img src="/images/swordsman.gif" className="img-fluid" />
+        <img src="/images/swordsman.gif" className="img-fluid" alt="GIF of swordsman spinning blades" />
       </div>
         {props.data.map((r) => (
           <React.Fragment key={r._id}>
