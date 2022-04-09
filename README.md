@@ -7,7 +7,7 @@
 All-About-Swords is a website that that aims to share the kind of swords that have been developed in the world throughout history. Allowing them to share more info on the types of sword, where it was originated from, what time period was it from, and a brief description of the sword.
 
 **Organisational Goals**
-The website aims to provide more info about the history of swords to sword enthusiasts and people looking for more info on swords. 
+The website aims to provide more info about the history of swords to sword enthusiasts and people looking for more info on swords.
 
 **User Goals**
 The user goals are to to share their findings and post factually correct information and fun facts on the swords that they have found.
@@ -30,13 +30,17 @@ _Content Requirements_
 
 _Non-functional Requirements_
 
-* Mobile Responsiveness
-* Performance
+- Mobile Responsiveness
+- Performance
 
 ### **Structure**
 
 _Content Info_
 
-This website will be a Single Page Application.  
+This website will be a Single Page Application.
 
+### **Credits**
 
+_images_
+
+Sword Logo Vector by svgrepo
