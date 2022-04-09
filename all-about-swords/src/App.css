@@ -135,3 +135,7 @@ i:hover {
 .warning {
   background-color: #fffdf6 !important;
 }
+
+.text-danger {
+  font-size: .9rem !important;
+}

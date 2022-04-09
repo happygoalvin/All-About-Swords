@@ -63,13 +63,13 @@ export default function swordList(props) {
                         className="btn btn-success mx-1"
                         onClick={() => props.updateSelectedSword(r)}
                       >
-                        <i class="fa-solid fa-pen-to-square"></i>
+                        <i className="fa-solid fa-pen-to-square"></i>
                       </button>
                       <button
                         className="btn btn-danger mx-1"
                         onClick={() => props.confirmDelete(r)}
                       >
-                        <i class="fa-solid fa-trash"></i>
+                        <i className="fa-solid fa-trash"></i>
                       </button>
                     </div>
                   </div>

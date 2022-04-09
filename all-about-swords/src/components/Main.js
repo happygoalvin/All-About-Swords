@@ -4,7 +4,7 @@ import AddNewSword from "./AddNewSword";
 import EditSelectedSword from "./EditSelectedSword";
 import ConfirmDelete from "./ConfirmDelete";
 import axios from "axios";
-import '../App.css'
+import "../App.css";
 import { base_url } from "../constants";
 
 export default class swordInfo extends React.Component {
@@ -32,6 +32,15 @@ export default class swordInfo extends React.Component {
     newFightingStyle: [],
     selectedSword: {},
     deleteSwordData: {},
+    nameError: "",
+    originError:"",
+    descriptionError:"",
+    imageUrlError:"",
+    bladeMetalError:"",
+    bladeLengthError:"",
+    timePeriodError:"",
+    fightingStyleError:"",
+    tagError:"",
   };
 
   // @dev updateTags is passed as props to SearchBar component. Use this to update ...this.state['filterOptions']['tags']
@@ -101,6 +110,85 @@ export default class swordInfo extends React.Component {
   };
 
   addNewSword = async () => {
+
+    let invalid = false;
+
+    if (
+      this.state.newTitle.length <= 2 ||
+      !this.state.newTitle.match(/^[a-zA-Z]+$/)
+    ) {
+      invalid = true;
+      this.setState({
+        nameError: "Please enter a proper sword title"
+      })
+    }
+
+    if (this.state.newOrigin.length <= 0 && !this.state.newOrigin.match(/^[a-zA-Z]+$/)) {
+      invalid = true;
+      this.setState({
+        originError: "Please enter a proper country of origin"
+      })
+    }
+
+    if (this.state.newDescription.length <= 50) {
+      invalid = true;
+      this.setState({
+        descriptionError: "Please enter a description that's greater than 50 characters"
+      })
+    }
+
+    if (
+      this.state.newImageUrl.length <= 0 &&
+      !this.state.newImageUrl.includes("https://") &&
+      !this.state.newImageUrl.includes("http://")
+    ) {
+      invalid = true;
+      this.setState({
+        imageUrlError: "Please enter a proper image url with http:// or https://"
+      })
+    }
+
+      if (!this.state.newBlade.metal.match(/^[A-Za-z.\s-]+$/)) {
+        invalid = true;
+        this.setState({
+          bladeMetalError: "Please enter a proper metal"
+        })
+      }
+
+      if (!this.state.newBlade.length.toString().match(/^[1-9]\d*$/)) {
+        invalid = true;
+        this.setState({
+          bladeLengthError: "Please enter proper length using integers only"
+        })
+      }
+    
+
+    if (
+      this.state.newTimePeriodCreated.length <= 0 &&
+      !this.state.newTimePeriodCreated.includes("AD") &&
+      !this.state.newTimePeriodCreated.includes("BC")
+    ) {
+      invalid = true;
+      this.setState({
+        timePeriodError: "Please enter time period using AD or BC"
+      })
+    }
+
+    if (this.state.newFightingStyle && this.state.newFightingStyle.length < 1 && !this.state.newFightingStyle.includes(",")) {
+      invalid = true;
+      this.setState({
+        fightingStyleError: "Please enter at least one fighting style and separate inputs with a ','"
+      })
+    }
+
+    if (this.state.newTags.length < 1 || this.state.newTags.length > 3) {
+      invalid = true;
+      this.setState({
+        tagError: "Please select 1 to 3 tags only"
+      })
+    }
+
+    if (invalid = false) {
     await axios.post(base_url + "swords", {
       name: this.state.newTitle,
       origin: this.state.newOrigin,
@@ -117,6 +205,7 @@ export default class swordInfo extends React.Component {
       data: swordRequest.data.sword_info,
       active: "main",
     });
+  }
   };
 
   cancelAddNew = () => {
@@ -308,6 +397,15 @@ export default class swordInfo extends React.Component {
             updateBladeField={this.updateBladeField}
             addNewSword={this.addNewSword}
             cancelAddNew={this.cancelAddNew}
+            nameError={this.state.nameError}
+            originError={this.state.originError}
+            descriptionError={this.state.descriptionError}
+            imageUrlError={this.state.imageUrlError}
+            bladeMetalError={this.state.bladeMetalError}
+            bladeLengthError={this.state.bladeLengthError}
+            timePeriodError={this.state.timePeriodError}
+            fightingStyleError={this.state.fightingStyleError}
+            tagError={this.state.tagError}
           />
         </React.Fragment>
       );

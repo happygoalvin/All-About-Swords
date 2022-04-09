@@ -24,6 +24,7 @@ export default function AddNewSword(props) {
                 value={props.newTitle}
                 onChange={props.updateFormField}
               />
+              <span className="text-danger">{props.nameError}</span>
             </div>
             <div className="col-md-6 col-lg-4">
               <label className="form-label my-1">Origin</label>
@@ -35,6 +36,7 @@ export default function AddNewSword(props) {
                 value={props.newOrigin}
                 onChange={props.updateFormField}
               />
+              <span className="text-danger">{props.originError}</span>
             </div>
             <div className="col-md-6 col-lg-4">
               <label className="form-label my-1">Time Period Created</label>
@@ -46,6 +48,7 @@ export default function AddNewSword(props) {
                 value={props.newTimePeriodCreated}
                 onChange={props.updateFormField}
               />
+              <span className="text-danger">{props.timePeriodError}</span>
             </div>
             <div className="col-md-6 col-lg-12">
               <label className="form-label my-1">Image URL</label>
@@ -57,6 +60,7 @@ export default function AddNewSword(props) {
                 value={props.newImageUrl}
                 onChange={props.updateFormField}
               />
+              <span className="text-danger">{props.imageUrlError}</span>
             </div>
             </div>
             <div className="row">
@@ -71,6 +75,7 @@ export default function AddNewSword(props) {
                   value={props.newBladeMetal}
                   onChange={props.updateBladeField}
                 />
+                <span className="text-danger">{props.bladeMetalError}</span>
               </div>
               <div className="col-md-4">
                 <label className="form-label my-1">Length</label>
@@ -82,6 +87,7 @@ export default function AddNewSword(props) {
                   value={props.newBladeLength + ""}
                   onChange={props.updateBladeField}
                 />
+                <span className="text-danger">{props.bladeLengthError}</span>
               </div>
               <div className="col-md-4">
                 <label className="form-label my-1">Unit of Measurement</label>
@@ -106,6 +112,7 @@ export default function AddNewSword(props) {
                 value={props.newDescription}
                 onChange={props.updateFormField}
               ></textarea>
+              <span className="text-danger">{props.descriptionError}</span>
             </div>
             <div className="row">
               <div className="col-md-6">
@@ -119,6 +126,7 @@ export default function AddNewSword(props) {
                   value={props.newFightingStyle}
                   onChange={props.updateFormField}
                 ></textarea>
+                <span className="text-danger">{props.fightingStyleError}</span>
               </div>
               <div className="col-md-6">
                 <h4 className="my-3">Tags</h4>
@@ -141,6 +149,7 @@ export default function AddNewSword(props) {
                     </React.Fragment>
                   );
                 })}
+                <span className="text-danger">{props.tagError}</span>
               </div>
               <div className="my-2">
                 <button
