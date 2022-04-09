@@ -7,7 +7,7 @@ export default function EditNewSword(props) {
       <div className="container">
         <h1 className="d-flex justify-content-center my-3">Edit Sword Info</h1>
         <p className="d-flex justify-content-center">
-          Noticed wrong facts on the {props.selectedSword.name}? Do help the
+          Noticed wrong facts on {props.selectedSword.name}? Do help the
           community by providing factual information. Thank you for your
           contribution.
         </p>
@@ -22,6 +22,7 @@ export default function EditNewSword(props) {
               value={props.selectedSword.name}
               onChange={props.editFormField}
             />
+            <span className="text-danger">{props.titleError}</span>
           </div>
           <div className="col-md-6 col-lg-4">
             <label className="form-label my-1">Origin</label>
@@ -33,6 +34,7 @@ export default function EditNewSword(props) {
               value={props.selectedSword.origin}
               onChange={props.editFormField}
             />
+            <span className="text-danger">{props.originError}</span>
           </div>
           <div className="col-md-6 col-lg-4">
             <label className="form-label my-1">Time Period Created</label>
@@ -44,6 +46,7 @@ export default function EditNewSword(props) {
               value={props.selectedSword.time_period_created}
               onChange={props.editFormField}
             />
+            <span className="text-danger">{props.timePeriodError}</span>
           </div>
           <div className="col-md-6 col-lg-12">
             <label className="form-label my-1">Image URL</label>
@@ -55,6 +58,7 @@ export default function EditNewSword(props) {
               value={props.selectedSword.image_url}
               onChange={props.editFormField}
             />
+            <span className="text-danger">{props.imageUrlError}</span>
           </div>
         </div>
         <div className="row">
@@ -69,6 +73,7 @@ export default function EditNewSword(props) {
               value={props.selectedSword.blade.metal}
               onChange={props.editBladeField}
             />
+            <span className="text-danger">{props.bladeMetalError}</span>
           </div>
           <div className="col-md-4">
             <label className="form-label my-1">Length</label>
@@ -80,6 +85,7 @@ export default function EditNewSword(props) {
               value={props.selectedSword.blade.length}
               onChange={props.editBladeField}
             />
+            <span className="text-danger">{props.bladeLengthError}</span>
           </div>
           <div className="col-md-4">
             <label className="form-label my-1">Unit of Measurement</label>
@@ -98,12 +104,13 @@ export default function EditNewSword(props) {
           <h4 className="my-2">Description</h4>
           <textarea
             className="form-control"
-            name="newDescription"
+            name="description"
             style={{ height: "10rem", maxHeight: "20rem" }}
             placeholder="Please enter sword description with at least 50 characters"
             value={props.selectedSword.description}
             onChange={props.editFormField}
           ></textarea>
+          <span className="text-danger">{props.descriptionError}</span>
         </div>
         <div className="row">
           <div className="col-md-6">
@@ -117,6 +124,7 @@ export default function EditNewSword(props) {
               value={props.selectedSword.fighting_style}
               onChange={props.editFormField}
             ></textarea>
+            <span className="text-danger">{props.fightingStyleError}</span>
           </div>
           <div className="col-md-6">
             <h4 className="my-3">Tags</h4>
@@ -137,6 +145,7 @@ export default function EditNewSword(props) {
                 </React.Fragment>
               );
             })}
+            <span className="text-danger">{props.tagError}</span>
           </div>
           <div className="my-2">
             <button

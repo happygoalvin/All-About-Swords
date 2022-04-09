@@ -24,7 +24,7 @@ export default function AddNewSword(props) {
                 value={props.newTitle}
                 onChange={props.updateFormField}
               />
-              <span className="text-danger">{props.nameError}</span>
+              <span className="text-danger">{props.titleError}</span>
             </div>
             <div className="col-md-6 col-lg-4">
               <label className="form-label my-1">Origin</label>

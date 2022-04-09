@@ -32,15 +32,15 @@ export default class swordInfo extends React.Component {
     newFightingStyle: [],
     selectedSword: {},
     deleteSwordData: {},
-    nameError: "",
-    originError:"",
-    descriptionError:"",
-    imageUrlError:"",
-    bladeMetalError:"",
-    bladeLengthError:"",
-    timePeriodError:"",
-    fightingStyleError:"",
-    tagError:"",
+    titleError: "",
+    originError: "",
+    descriptionError: "",
+    imageUrlError: "",
+    bladeMetalError: "",
+    bladeLengthError: "",
+    timePeriodError: "",
+    fightingStyleError: "",
+    tagError: "",
   };
 
   // @dev updateTags is passed as props to SearchBar component. Use this to update ...this.state['filterOptions']['tags']
@@ -110,7 +110,6 @@ export default class swordInfo extends React.Component {
   };
 
   addNewSword = async () => {
-
     let invalid = false;
 
     if (
@@ -119,49 +118,77 @@ export default class swordInfo extends React.Component {
     ) {
       invalid = true;
       this.setState({
-        nameError: "Please enter a proper sword title"
+        titleError: "Please enter a proper sword title",
+      });
+    } else {
+      this.setState({
+        titleError: ""
       })
     }
 
-    if (this.state.newOrigin.length <= 0 && !this.state.newOrigin.match(/^[a-zA-Z]+$/)) {
+    if (
+      this.state.newOrigin.length <= 0 &&
+      !this.state.newOrigin.match(/^[a-zA-Z ]+$/)
+    ) {
       invalid = true;
       this.setState({
-        originError: "Please enter a proper country of origin"
+        originError: "Please enter a proper country of origin",
+      });
+    } else {
+      this.setState({
+        originError: ""
       })
     }
 
     if (this.state.newDescription.length <= 50) {
       invalid = true;
       this.setState({
-        descriptionError: "Please enter a description that's greater than 50 characters"
+        descriptionError:
+          "Please enter a description that's greater than 50 characters",
+      });
+    } else (
+      this.setState({
+        descriptionError:""
       })
-    }
+    )
 
     if (
-      this.state.newImageUrl.length <= 0 &&
-      !this.state.newImageUrl.includes("https://") &&
-      !this.state.newImageUrl.includes("http://")
+      this.state.newImageUrl.length <= 0 ||
+      (!this.state.newImageUrl.includes("https://") &&
+      !this.state.newImageUrl.includes("http://"))
     ) {
       invalid = true;
       this.setState({
-        imageUrlError: "Please enter a proper image url with http:// or https://"
+        imageUrlError:
+          "Please enter a proper image url with http:// or https://",
+      });
+    } else (
+      this.setState({
+        imageUrlError: ""
       })
-    }
+    )
 
-      if (!this.state.newBlade.metal.match(/^[A-Za-z.\s-]+$/)) {
-        invalid = true;
-        this.setState({
-          bladeMetalError: "Please enter a proper metal"
-        })
-      }
+    if (!this.state.newBlade.metal.match(/^[A-Za-z.\s-]+$/)) {
+      invalid = true;
+      this.setState({
+        bladeMetalError: "Please enter a proper metal",
+      });
+    } else (
+      this.setState({
+        bladeMetalError: ""
+      })
+    )
 
-      if (!this.state.newBlade.length.toString().match(/^[1-9]\d*$/)) {
-        invalid = true;
-        this.setState({
-          bladeLengthError: "Please enter proper length using integers only"
-        })
-      }
-    
+    if (!this.state.newBlade.length.toString().match(/^[1-9]\d*$/)) {
+      invalid = true;
+      this.setState({
+        bladeLengthError: "Please enter proper length using integers only",
+      });
+    } else (
+      this.setState({
+        bladeLengthError: ""
+      })
+    )
 
     if (
       this.state.newTimePeriodCreated.length <= 0 &&
@@ -170,52 +197,219 @@ export default class swordInfo extends React.Component {
     ) {
       invalid = true;
       this.setState({
-        timePeriodError: "Please enter time period using AD or BC"
+        timePeriodError: "Please enter time period using AD or BC",
+      });
+    } else (
+      this.setState({
+        timePeriodError: ""
       })
-    }
+    )
 
-    if (this.state.newFightingStyle && this.state.newFightingStyle.length < 1 && !this.state.newFightingStyle.includes(",")) {
+    if (
+      this.state.newFightingStyle.length < 1 &&
+      !this.state.newFightingStyle.includes(",")
+    ) {
       invalid = true;
       this.setState({
-        fightingStyleError: "Please enter at least one fighting style and separate inputs with a ','"
+        fightingStyleError:
+          "Please enter at least one fighting style and separate inputs with a ','",
+      });
+    } else (
+      this.setState({
+        fightingStyleError: ""
       })
-    }
+    )
 
     if (this.state.newTags.length < 1 || this.state.newTags.length > 3) {
       invalid = true;
       this.setState({
-        tagError: "Please select 1 to 3 tags only"
+        tagError: "Please select 1 to 3 tags only",
+      });
+    } else (
+      this.setState({
+        tagError: ""
       })
+    )
+
+    if (invalid === false) {
+      await axios.post(base_url + "swords", {
+        name: this.state.newTitle,
+        origin: this.state.newOrigin,
+        time_period_created: this.state.newTimePeriodCreated,
+        image_url: this.state.newImageUrl,
+        description: this.state.newDescription,
+        blade: this.state.newBlade,
+        fighting_style: this.state.newFightingStyle.split(","),
+        tags: this.state.newTags,
+      });
+      let swordRequest = await axios.get(base_url + "swords");
+
+      this.setState({
+        data: swordRequest.data.sword_info,
+        active: "main",
+        newTitle: "",
+        newOrigin: "",
+        newDescription: "",
+        newBlade: {
+          metal: "",
+          length: "",
+        },
+        newImageUrl: "",
+        newTimePeriodCreated: "",
+        newTags: [],
+        newFightingStyle: [],
+      });
     }
-
-    if (invalid = false) {
-    await axios.post(base_url + "swords", {
-      name: this.state.newTitle,
-      origin: this.state.newOrigin,
-      time_period_created: this.state.newTimePeriodCreated,
-      image_url: this.state.newImageUrl,
-      description: this.state.newDescription,
-      blade: this.state.newBlade,
-      fighting_style: this.state.newFightingStyle.split(","),
-      tags: this.state.newTags,
-    });
-    let swordRequest = await axios.get(base_url + "swords");
-
-    this.setState({
-      data: swordRequest.data.sword_info,
-      active: "main",
-    });
-  }
   };
 
   cancelAddNew = () => {
     this.setState({
       newTags: [],
       active: "main",
+      newTitle: "",
+      newOrigin: "",
+      newDescription: "",
+      newBlade: {
+        metal: "",
+        length: "",
+      },
+      newImageUrl: "",
+      newTimePeriodCreated: "",
+      newFightingStyle: [],
+      titleError: "",
+      originError: "",
+      descriptionError: "",
+      imageUrlError: "",
+      bladeMetalError: "",
+      bladeLengthError: "",
+      timePeriodError: "",
+      fightingStyleError: "",
+      tagError: "",
     });
   };
 
   editSword = async () => {
+    let invalid = false;
+
+    if (
+      this.state.selectedSword.name.length <= 2 ||
+      !this.state.selectedSword.name.match(/^[a-zA-Z]+$/)
+    ) {
+      invalid = true;
+      this.setState({
+        titleError: "Please enter a proper sword title",
+      });
+    } else {
+      this.setState({
+        titleError: ""
+      })
+    }
+
+    if (
+      this.state.selectedSword.origin.length <= 0 &&
+      !this.state.selectedSword.origin.match(/^[a-zA-Z ]+$/)
+    ) {
+      invalid = true;
+      this.setState({
+        originError: "Please enter a proper country of origin",
+      });
+    } else {
+      this.setState({
+        originError: ""
+      })
+    }
+
+    if (this.state.selectedSword.description.length <= 50) {
+      invalid = true;
+      this.setState({
+        descriptionError:
+          "Please enter a description that's greater than 50 characters",
+      });
+    } else {
+      this.setState({
+        descriptionError: ""
+      })
+    }
+
+    if (
+      this.state.selectedSword.image_url.length <= 0 &&
+      !this.state.selectedSword.image_url.includes("https://") &&
+      !this.state.selectedSword.image_url.includes("http://")
+    ) {
+      invalid = true;
+      this.setState({
+        imageUrlError:
+          "Please enter a proper image url with http:// or https://",
+      });
+    } else {
+      this.setState({
+        imageUrlError: ""
+      })
+    }
+
+    if (!this.state.selectedSword.blade.metal.match(/^[A-Za-z.\s-]+$/)) {
+      invalid = true;
+      this.setState({
+        bladeMetalError: "Please enter a proper metal",
+      });
+    } else {
+      this.setState({
+        bladeMetalError: ""
+      })
+    }
+
+    if (!this.state.selectedSword.blade.length.toString().match(/^[1-9]\d*$/)) {
+      invalid = true;
+      this.setState({
+        bladeLengthError: "Please enter proper length using integers only",
+      });
+    } else (
+      this.setState({
+        bladeLengthError: ""
+      })
+    )
+
+    if (
+      this.state.selectedSword.time_period_created.length <= 0 &&
+      !this.state.selectedSword.time_period_created.includes("AD") &&
+      !this.state.selectedSword.time_period_created.includes("BC")
+    ) {
+      invalid = true;
+      this.setState({
+        timePeriodError: "Please enter time period using AD or BC",
+      });
+    } else (
+      this.setState({
+        timePeriodError: ""
+      })
+    )
+
+    if (
+      this.state.selectedSword.fighting_style.length < 1 &&
+      !this.state.selectedSword.fighting_style.includes(",")
+    ) {
+      invalid = true;
+      this.setState({
+        fightingStyleError:
+          "Please enter at least one fighting style and separate inputs with a ','",
+      });
+    } else {
+      this.setState({
+        fightingStyleError: ""
+      })
+    }
+
+    if (this.state.newTags.length < 1 || this.state.newTags.length > 3) {
+      invalid = true;
+      this.setState({
+        tagError: "Please select 1 to 3 tags only",
+      });
+    } else (
+      this.setState({
+        tagError: ""
+      })
+    )
+
     let fighting_style = [];
     if (Array.isArray(this.state.selectedSword.fighting_style)) {
       fighting_style = this.state.selectedSword.fighting_style;
@@ -223,28 +417,41 @@ export default class swordInfo extends React.Component {
       fighting_style = this.state.selectedSword.fighting_style.split(",");
     }
 
-    await axios.put(base_url + `swords/${this.state.selectedSword._id}`, {
-      name: this.state.selectedSword.name,
-      origin: this.state.selectedSword.origin,
-      time_period_created: this.state.selectedSword.time_period_created,
-      image_url: this.state.selectedSword.image_url,
-      description: this.state.selectedSword.description,
-      blade: this.state.selectedSword.blade,
-      fighting_style: fighting_style,
-      tags: this.state.newTags,
-    });
-    let swordRequest = await axios.get(base_url + "swords");
-    this.setState({
-      data: swordRequest.data.sword_info,
-      newTags: [],
-      active: "main",
-    });
+    if (invalid === false) {
+      await axios.put(base_url + `swords/${this.state.selectedSword._id}`, {
+        name: this.state.selectedSword.name,
+        origin: this.state.selectedSword.origin,
+        time_period_created: this.state.selectedSword.time_period_created,
+        image_url: this.state.selectedSword.image_url,
+        description: this.state.selectedSword.description,
+        blade: this.state.selectedSword.blade,
+        fighting_style: fighting_style,
+        tags: this.state.newTags,
+      });
+      let swordRequest = await axios.get(base_url + "swords");
+      this.setState({
+        data: swordRequest.data.sword_info,
+        newTags: [],
+        active: "main",
+        selectedSword: {}
+      });
+    }
   };
 
   cancelEdit = () => {
     this.setState({
       active: "main",
       newTags: [],
+      selectedSword: {},
+      titleError: "",
+      originError: "",
+      descriptionError: "",
+      imageUrlError: "",
+      bladeMetalError: "",
+      bladeLengthError: "",
+      timePeriodError: "",
+      fightingStyleError: "",
+      tagError: "",
     });
   };
 
@@ -397,7 +604,7 @@ export default class swordInfo extends React.Component {
             updateBladeField={this.updateBladeField}
             addNewSword={this.addNewSword}
             cancelAddNew={this.cancelAddNew}
-            nameError={this.state.nameError}
+            titleError={this.state.titleError}
             originError={this.state.originError}
             descriptionError={this.state.descriptionError}
             imageUrlError={this.state.imageUrlError}
@@ -422,6 +629,15 @@ export default class swordInfo extends React.Component {
             updateTags={this.updateTags}
             editSword={this.editSword}
             cancelEdit={this.cancelEdit}
+            titleError={this.state.titleError}
+            originError={this.state.originError}
+            descriptionError={this.state.descriptionError}
+            imageUrlError={this.state.imageUrlError}
+            bladeMetalError={this.state.bladeMetalError}
+            bladeLengthError={this.state.bladeLengthError}
+            timePeriodError={this.state.timePeriodError}
+            fightingStyleError={this.state.fightingStyleError}
+            tagError={this.state.tagError}
           />
         </React.Fragment>
       );
