@@ -3,6 +3,7 @@ import axios from "axios";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import { base_url } from "../constants";
+import "../App.css";
 
 export default function SearchBar(props) {
   const [selectValue, setSelectValue] = useState([]);
@@ -33,8 +34,14 @@ export default function SearchBar(props) {
 
   return (
     <React.Fragment>
-      
-          <h6>Filter Options</h6>
+      <div className="my-3">
+        <div className="d-flex justify-content-between">
+        <h3>Filter</h3>
+        <button className="btn s-btn" onClick={props.refreshSearch}>
+          <i className="fa-solid fa-arrow-rotate-left"></i>
+        </button>
+        </div>
+        <h6>By Name</h6>
         <input
           type="text"
           name="searchName"
@@ -43,50 +50,50 @@ export default function SearchBar(props) {
           onChange={props.updateFilterOptions}
           placeholder="Search by sword name..."
         />
-        
-        
-          <h6>Search by Blade Length</h6>
-      <input
-        type="number"
-        name="searchMinLength"
-        value={props.value.searchMinLength}
-        className="form-control mt-2"
-        onChange={props.updateFilterOptions}
-        placeholder="Please enter minimum blade length"
-      />
-      
-      <input
-        type="number"
-        name="searchMaxLength"
-        value={props.value.searchMaxLength}
-        className="form-control mx-3 mt-3"
-        onChange={props.updateFilterOptions}
-        placeholder="Please enter maximum blade length"
-      />
-      
-      <Autocomplete
-        multiple
-        id="tags-outlined"
-        options={swordTag}
-        value={selectValue}
-        onChange={(e, newValue) => setSelectValue(newValue)}
-        defaultValue={[]}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label="Filter By Tag"
-            placeholder="Select a tag"
-          />
-        )}
-      />
-      
-      <input
-        type="submit"
-        className="btn btn-primary btn-sm mt-3 p-2"
-        onClick={props.onClickUpdate}
-        value="Submit"
-      />
-      
+      </div>
+      <div>
+        <h6>By Blade Length</h6>
+        <input
+          type="number"
+          name="searchMinLength"
+          value={props.value.searchMinLength}
+          className="form-control mt-2"
+          onChange={props.updateFilterOptions}
+          placeholder="Min. Length"
+        />
+
+        <input
+          type="number"
+          name="searchMaxLength"
+          value={props.value.searchMaxLength}
+          className="form-control mt-2"
+          onChange={props.updateFilterOptions}
+          placeholder="Max. Length"
+        />
+      </div>
+      <div className="mt-2">
+        <h6>By Tags</h6>
+        <Autocomplete
+          multiple
+          id="tags-outlined"
+          options={swordTag}
+          value={selectValue}
+          onChange={(e, newValue) => setSelectValue(newValue)}
+          defaultValue={[]}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Filter By Tag"
+              placeholder="Select a tag"
+            />
+          )}
+        />
+      </div>
+      <div className="d-flex justify-content-end">
+        <button className="btn s-btn mt-2 p-2" onClick={props.onClickUpdate}>
+          <i className="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </div>
     </React.Fragment>
   );
 }

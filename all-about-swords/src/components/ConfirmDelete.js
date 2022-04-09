@@ -3,7 +3,8 @@ import React from "react";
 export default function ConfirmDelete(props) {
   return (
     <React.Fragment>
-      <div className="alert alert-danger" role="alert">
+      <div className="warning">
+      <div className="alert alert-danger mt-3" role="alert">
         <h4 className="alert-heading">
           Confirm Delete {props.deleteSwordData.name}?
         </h4>
@@ -18,6 +19,7 @@ export default function ConfirmDelete(props) {
         <button className="btn btn-primary mx-2" onClick={props.cancelDelete}>
           Cancel
         </button>
+      </div>
       </div>
     </React.Fragment>
   );

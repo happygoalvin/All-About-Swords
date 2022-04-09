@@ -4,6 +4,7 @@ import AddNewSword from "./AddNewSword";
 import EditSelectedSword from "./EditSelectedSword";
 import ConfirmDelete from "./ConfirmDelete";
 import axios from "axios";
+import '../App.css'
 import { base_url } from "../constants";
 
 export default class swordInfo extends React.Component {
@@ -54,11 +55,6 @@ export default class swordInfo extends React.Component {
       tagData: response.data.tags,
     });
   };
-
-  componentDidMount() {
-    this.fetchSwordData();
-    this.fetchTagData();
-  }
 
   updateFormField = (e) => {
     this.setState({
@@ -262,6 +258,18 @@ export default class swordInfo extends React.Component {
     });
   };
 
+  refreshSearch = async () => {
+    let response = await axios.get(base_url + "swords");
+    this.setState({
+      data: response.data.sword_info,
+    });
+  };
+
+  componentDidMount() {
+    this.fetchSwordData();
+    this.fetchTagData();
+  }
+
   renderContent() {
     if (this.state.active === "main") {
       return (
@@ -276,6 +284,7 @@ export default class swordInfo extends React.Component {
             selectedSword={this.state.selectedSword}
             updateSelectedSword={this.updateSelectedSword}
             confirmDelete={this.confirmDelete}
+            refreshSearch={this.refreshSearch}
           />
         </React.Fragment>
       );
@@ -338,14 +347,19 @@ export default class swordInfo extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg navbar-light">
           <div className="container-fluid">
-            <a className="navbar-brand" onClick={() => {this.setState({active:"main"})}}>
+            <a
+              className="navbar-brand"
+              onClick={() => {
+                this.setState({ active: "main" });
+              }}
+            >
               <img
                 src="/images/sword-logo.svg"
                 alt=""
-                width="30"
-                height="30"
+                width="40"
+                height="50"
                 className="d-inline-block align-text-center mx-3"
               />
               All About Swords
@@ -374,7 +388,7 @@ export default class swordInfo extends React.Component {
                     }}
                     aria-current="page"
                   >
-                    Sword Listing
+                    Sword Catalogue
                   </a>
                 </li>
                 <li className="nav-item">
