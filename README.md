@@ -1,5 +1,7 @@
 # All-About-Swords
 
+<img src="./readme_images/all-device-display.png" style="display:block"></br>
+
 ## Project Summary
 
 **Project Context**
@@ -163,7 +165,11 @@ _Non-functional Requirements_
 ## Credits
 
 ### **images**
+[Swordsman-gif](https://www.reddit.com/r/gifs/comments/1u6xj5/masked_samurai_swordsman/) Hero GIF credits to Ze-skywalker who posted this on reddit.
 
 ### **Icons**
+[Font Awesome](https://fontawesome.com/) For icons used in this web app.
+[SVG Repo](https://www.svgrepo.com/) For Brand Logo.
 
 ### **Fonts**
+[Google Fonts](https://fonts.google.com/) Spectral Font-family courtesy of google fonts.
