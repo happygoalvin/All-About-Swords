@@ -1,7 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Spectral:wght@400;600&display=swap");
 
+head,
+body {
+  position: relative;
+  min-height: 100vh;
+  font-family: "Spectral", serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  background-color: #fffdf6 !important;
+}
+
 .App {
-  overflow-x: hidden;
+  overflow: hidden;
   font-family: "Spectral", serif;
   font-weight: 700;
   font-size: 1.2rem;
@@ -137,5 +147,34 @@ i:hover {
 }
 
 .text-danger {
-  font-size: .9rem !important;
+  font-size: 0.9rem !important;
+}
+
+.footer {
+  background-color: #a49e8d;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  font-family: "Spectral", serif;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.footer ul {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 1.2rem;
+}
+
+.footer ul li {
+  list-style-type: none;
+  padding-right: 1.5rem;
+}
+
+.container {
+  margin-bottom: 5rem;
+}
+
+#container-margin {
+  margin-bottom: 5rem;
 }

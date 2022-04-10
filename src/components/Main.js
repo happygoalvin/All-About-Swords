@@ -122,8 +122,8 @@ export default class swordInfo extends React.Component {
       });
     } else {
       this.setState({
-        titleError: ""
-      })
+        titleError: "",
+      });
     }
 
     if (
@@ -136,8 +136,8 @@ export default class swordInfo extends React.Component {
       });
     } else {
       this.setState({
-        originError: ""
-      })
+        originError: "",
+      });
     }
 
     if (this.state.newDescription.length <= 50) {
@@ -146,49 +146,45 @@ export default class swordInfo extends React.Component {
         descriptionError:
           "Please enter a description that's greater than 50 characters",
       });
-    } else (
+    } else
       this.setState({
-        descriptionError:""
-      })
-    )
+        descriptionError: "",
+      });
 
     if (
       this.state.newImageUrl.length <= 0 ||
       (!this.state.newImageUrl.includes("https://") &&
-      !this.state.newImageUrl.includes("http://"))
+        !this.state.newImageUrl.includes("http://"))
     ) {
       invalid = true;
       this.setState({
         imageUrlError:
           "Please enter a proper image url with http:// or https://",
       });
-    } else (
+    } else
       this.setState({
-        imageUrlError: ""
-      })
-    )
+        imageUrlError: "",
+      });
 
     if (!this.state.newBlade.metal.match(/^[A-Za-z.\s-]+$/)) {
       invalid = true;
       this.setState({
         bladeMetalError: "Please enter a proper metal",
       });
-    } else (
+    } else
       this.setState({
-        bladeMetalError: ""
-      })
-    )
+        bladeMetalError: "",
+      });
 
     if (!this.state.newBlade.length.toString().match(/^[1-9]\d*$/)) {
       invalid = true;
       this.setState({
         bladeLengthError: "Please enter proper length using integers only",
       });
-    } else (
+    } else
       this.setState({
-        bladeLengthError: ""
-      })
-    )
+        bladeLengthError: "",
+      });
 
     if (
       this.state.newTimePeriodCreated.length <= 0 &&
@@ -199,11 +195,10 @@ export default class swordInfo extends React.Component {
       this.setState({
         timePeriodError: "Please enter time period using AD or BC",
       });
-    } else (
+    } else
       this.setState({
-        timePeriodError: ""
-      })
-    )
+        timePeriodError: "",
+      });
 
     if (
       this.state.newFightingStyle.length < 1 &&
@@ -214,22 +209,20 @@ export default class swordInfo extends React.Component {
         fightingStyleError:
           "Please enter at least one fighting style and separate inputs with a ','",
       });
-    } else (
+    } else
       this.setState({
-        fightingStyleError: ""
-      })
-    )
+        fightingStyleError: "",
+      });
 
     if (this.state.newTags.length < 1 || this.state.newTags.length > 3) {
       invalid = true;
       this.setState({
         tagError: "Please select 1 to 3 tags only",
       });
-    } else (
+    } else
       this.setState({
-        tagError: ""
-      })
-    )
+        tagError: "",
+      });
 
     if (invalid === false) {
       await axios.post(base_url + "swords", {
@@ -301,8 +294,8 @@ export default class swordInfo extends React.Component {
       });
     } else {
       this.setState({
-        titleError: ""
-      })
+        titleError: "",
+      });
     }
 
     if (
@@ -315,8 +308,8 @@ export default class swordInfo extends React.Component {
       });
     } else {
       this.setState({
-        originError: ""
-      })
+        originError: "",
+      });
     }
 
     if (this.state.selectedSword.description.length <= 50) {
@@ -327,8 +320,8 @@ export default class swordInfo extends React.Component {
       });
     } else {
       this.setState({
-        descriptionError: ""
-      })
+        descriptionError: "",
+      });
     }
 
     if (
@@ -343,8 +336,8 @@ export default class swordInfo extends React.Component {
       });
     } else {
       this.setState({
-        imageUrlError: ""
-      })
+        imageUrlError: "",
+      });
     }
 
     if (!this.state.selectedSword.blade.metal.match(/^[A-Za-z.\s-]+$/)) {
@@ -354,8 +347,8 @@ export default class swordInfo extends React.Component {
       });
     } else {
       this.setState({
-        bladeMetalError: ""
-      })
+        bladeMetalError: "",
+      });
     }
 
     if (!this.state.selectedSword.blade.length.toString().match(/^[1-9]\d*$/)) {
@@ -363,11 +356,10 @@ export default class swordInfo extends React.Component {
       this.setState({
         bladeLengthError: "Please enter proper length using integers only",
       });
-    } else (
+    } else
       this.setState({
-        bladeLengthError: ""
-      })
-    )
+        bladeLengthError: "",
+      });
 
     if (
       this.state.selectedSword.time_period_created.length <= 0 &&
@@ -378,11 +370,10 @@ export default class swordInfo extends React.Component {
       this.setState({
         timePeriodError: "Please enter time period using AD or BC",
       });
-    } else (
+    } else
       this.setState({
-        timePeriodError: ""
-      })
-    )
+        timePeriodError: "",
+      });
 
     if (
       this.state.selectedSword.fighting_style.length < 1 &&
@@ -395,8 +386,8 @@ export default class swordInfo extends React.Component {
       });
     } else {
       this.setState({
-        fightingStyleError: ""
-      })
+        fightingStyleError: "",
+      });
     }
 
     if (this.state.newTags.length < 1 || this.state.newTags.length > 3) {
@@ -404,11 +395,10 @@ export default class swordInfo extends React.Component {
       this.setState({
         tagError: "Please select 1 to 3 tags only",
       });
-    } else (
+    } else
       this.setState({
-        tagError: ""
-      })
-    )
+        tagError: "",
+      });
 
     let fighting_style = [];
     if (Array.isArray(this.state.selectedSword.fighting_style)) {
@@ -433,7 +423,7 @@ export default class swordInfo extends React.Component {
         data: swordRequest.data.sword_info,
         newTags: [],
         active: "main",
-        selectedSword: {}
+        selectedSword: {},
       });
     }
   };
@@ -719,7 +709,9 @@ export default class swordInfo extends React.Component {
             </div>
           </div>
         </nav>
-        <div className="container-fluid">{this.renderContent()}</div>
+        <div className="container-fluid" id="container-margin">
+          <div>{this.renderContent()}</div>
+        </div>
       </React.Fragment>
     );
   }

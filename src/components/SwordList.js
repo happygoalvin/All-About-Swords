@@ -26,14 +26,14 @@ export default function swordList(props) {
           <React.Fragment key={r._id}>
             <div className="card lg-3" style={{ maxWidth: "100%" }}>
               <div className="row g-0">
-                <div className="col-md-5 col-lg-5 swordCatalogue">
+                <div className="col-lg-5 swordCatalogue">
                   <img
                     src={r.image_url}
                     className="img-fluid rounded-start"
                     alt="..."
                   />
                 </div>
-                <div className="col-md-7 col-lg-7 swordCatalogue">
+                <div className="col-lg-7 swordCatalogue">
                   <div className="card-body">
                     <h5 className="card-title">{r.name}</h5>
                     <p className="card-text">Origin: {r.origin}</p>

@@ -55,7 +55,7 @@ _Functional Specifications_
 
 1. User will be able to filter from a textbox search on the sword name and is able to search by a minimum sword length to a maximum sword length, and also from a multi-select dropdown on the tags that are given to a sword.
 
-2. User will be able to create, edit and delete a document.
+2. User will be able to create, edit and delete a document for the sword catalogue.
 
 _Content Requirements_
 
@@ -105,7 +105,7 @@ _Non-functional Requirements_
 |Nav Bar       |Mobile Responsive              |No error|
 |Nav Bar Links           |On Load / Click                |Takes me to the correct pages as intended, no error.|
 |Navbar collapse|Mobile Responsive / On Click | Navbar collapsible buttons work as intended.|
-|Sword Catalogue|Mobile Responsive           |No errors, upon hitting < 992px width filter options will become a row of columns to search. Upon htting < 768px width cards will display in columns as well.|
+|Sword Catalogue|Mobile Responsive           |No errors, upon hitting < 992px width filter options will become a row of columns to search. And cards will be displayed in a linear manner|
 |Sword Catalogue |On Load                      |Gets all sword info from the database and displays it in cards. No errors.|
 |Filter Options | On Click | Search functions works as intended, no error. Name will query by name, min length and max length will only query if both fields are filled and display the sword length in between the min length and max length. Tags will filter sword info that has the appropriate tags. |
 | Tags Information from API | On Load | Will display all the pre-defined labels and values from the database. |
