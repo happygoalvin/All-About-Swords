@@ -90,7 +90,7 @@ export default function SearchBar(props) {
         />
       </div>
       <div className="d-flex justify-content-end">
-        <button className="btn s-btn mt-2 p-2" onClick={props.onClickUpdate}>
+        <button className="btn s-btn mt-3" onClick={props.onClickUpdate}>
           <i className="fa-solid fa-magnifying-glass"></i>
         </button>
       </div>

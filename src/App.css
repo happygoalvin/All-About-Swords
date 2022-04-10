@@ -61,6 +61,12 @@ body {
   border: 1px solid rgba(0, 0, 0, 0.35) !important;
 }
 
+.s-btn {
+  padding:0 !important;
+  border:0 !important;
+  margin-right: 0.5rem;
+}
+
 .s-btn:hover {
   color: #fffdf6 !important;
 }
@@ -119,11 +125,12 @@ body {
 
 i {
   color: #1f1d1a;
+  font-size: 1.2rem;
 }
 
 i:hover {
   color: #fffdf6 !important;
-  transition: 0.2s ease-in-out;
+  transition: 0.1s ease-in-out;
 }
 
 .addNew {
