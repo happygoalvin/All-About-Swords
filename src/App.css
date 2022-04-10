@@ -178,10 +178,14 @@ i:hover {
   padding-right: 1.5rem;
 }
 
+.footer ul li i {
+  font-size: 1.3rem;
+}
+
 .container {
   margin-bottom: 5rem;
 }
 
 #container-margin {
-  margin-bottom: 5rem;
+  margin-bottom: 3.7rem;
 }
